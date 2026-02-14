@@ -13,7 +13,7 @@ const Subscription: React.FC = () => {
    }, []);
 
    return (
-      <div className="bg-obsidian min-h-screen pt-24">
+      <div className="bg-obsidian min-h-screen pt-20">
          {/* Hero with ambient video */}
          <div className="relative overflow-hidden mb-16">
             <video
@@ -30,8 +30,8 @@ const Subscription: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-obsidian/60 via-transparent to-obsidian"></div>
             <div className="relative z-10 text-center container mx-auto px-6 py-24">
                <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4">The Avera Club</span>
-               <h1 className="text-4xl md:text-6xl font-serif text-cream mb-6">Better Coffee.<br />On Autopilot.</h1>
-               <p className="text-cream-dim max-w-xl mx-auto text-lg">
+               <h1 className="text-3xl md:text-6xl font-serif text-cream mb-6">Better Coffee.<br />On Autopilot.</h1>
+               <p className="text-cream-dim max-w-xl mx-auto text-base md:text-lg">
                   Skip the supermarket stale beans. Get estate-level freshness delivered to your door at a schedule that suits you.
                </p>
             </div>

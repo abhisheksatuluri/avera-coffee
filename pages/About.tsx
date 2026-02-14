@@ -11,9 +11,9 @@ const About: React.FC = () => {
    }, []);
 
    return (
-      <div className="w-full bg-obsidian pt-20">
+      <div className="w-full bg-obsidian pt-16">
          {/* Hero */}
-         <div className="relative h-[70vh] w-full overflow-hidden">
+         <div className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden">
             <video
                ref={videoRef}
                autoPlay
@@ -26,9 +26,9 @@ const About: React.FC = () => {
                <source src="/ORIGIN STORY.mp4" type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/30 to-transparent"></div>
-            <div className="absolute bottom-0 left-0 p-6 md:p-20 z-10">
-               <h1 className="text-5xl md:text-7xl font-serif text-cream mb-4">Our Craft</h1>
-               <p className="text-xl text-cream-dim max-w-lg">Born in Hyderabad. Rooted in the Hills.</p>
+            <div className="absolute bottom-0 left-0 p-4 md:p-20 z-10">
+               <h1 className="text-4xl md:text-7xl font-serif text-cream mb-4">Our Craft</h1>
+               <p className="text-lg md:text-xl text-cream-dim max-w-lg">Born in Hyderabad. Rooted in the Hills.</p>
             </div>
          </div>
 

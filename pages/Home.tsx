@@ -15,6 +15,7 @@ interface ParallaxSectionProps {
   overlayOpacity?: string;
   className?: string;
   priority?: boolean;
+  align?: 'start' | 'center';
 }
 
 const ParallaxSection: React.FC<ParallaxSectionProps> = ({
@@ -23,7 +24,8 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
   bgType,
   overlayOpacity = "bg-black/40",
   className = "",
-  priority = false
+  priority = false,
+  align = 'center'
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -57,7 +59,7 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
   return (
     <section
       ref={ref}
-      className={`relative w-full min-h-screen md:h-screen md:snap-start flex flex-col justify-center overflow-hidden ${className}`}
+      className={`relative w-full min-h-screen md:h-screen md:snap-start flex flex-col ${align === 'start' ? 'justify-start' : 'justify-center'} overflow-hidden ${className}`}
     >
       {/* Background Media Layer — z-0 so it sits behind z-10 content but IN FRONT of parent bg */}
       <motion.div
@@ -123,10 +125,10 @@ const Home: React.FC = () => {
     window.dispatchEvent(new CustomEvent('avera-scroll', { detail: scrollTop }));
 
     if (isMobile) {
-      const startTop = 35; // % from top
-      const endTop = 3.5;  // % from top (navbar center)
-      const startScale = 1.1;
-      const endScale = 0.6;
+      const startTop = 40; // % from top — well below navbar
+      const endTop = 5;    // % from top (centered in 64px navbar)
+      const startScale = 1.0;
+      const endScale = 0.55;
       const travelPx = 200;
       const p = Math.min(Math.max(scrollTop / travelPx, 0), 1);
       // Ease-out for smoothness
@@ -136,7 +138,7 @@ const Home: React.FC = () => {
         left: '50%',
         top: `${startTop - ease * (startTop - endTop)}%`,
         transform: `translate(-50%, -50%) scale(${startScale - ease * (startScale - endScale)})`,
-        zIndex: 51,
+        zIndex: 49, // Below navbar (z-50) so it docks under it
         width: 'max-content',
         pointerEvents: 'none',
       });
@@ -155,7 +157,7 @@ const Home: React.FC = () => {
         left: '50%',
         top: `${Math.max(currentTop, endTopPx)}px`,
         transform: `translate(-50%, -50%) scale(${startScale - ease * (startScale - endScale)})`,
-        zIndex: 51,
+        zIndex: 49, // Below navbar (z-50) so it docks under it
         width: 'max-content',
         pointerEvents: 'none',
       });
@@ -204,13 +206,14 @@ const Home: React.FC = () => {
         bgType="video"
         priority={true}
         overlayOpacity="bg-black/30"
+        align="start"
       >
-        <div className="container mx-auto px-6 flex flex-col items-center text-center pt-32 md:pt-0">
+        <div className="container mx-auto px-4 md:px-6 flex flex-col items-center text-center pt-20 md:pt-0">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-4xl md:text-7xl font-serif font-bold text-cream mb-8 leading-tight max-w-5xl drop-shadow-2xl mt-24 md:mt-[28vh]"
+            className="text-3xl sm:text-4xl md:text-7xl font-serif font-bold text-cream mb-6 md:mb-8 leading-tight max-w-5xl drop-shadow-2xl mt-[55vh] md:mt-[45vh]"
           >
             Precision Roasted. <br />
             <span className="text-gold italic">Crafted For Those Who Refuse Average.</span>
@@ -220,7 +223,7 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="text-cream-dim text-lg md:text-2xl max-w-2xl mb-12 font-light tracking-wide drop-shadow-lg"
+            className="text-cream-dim text-base md:text-2xl max-w-2xl mb-8 md:mb-12 font-light tracking-wide drop-shadow-lg px-2"
           >
             100% Arabica specialty coffee, roasted fresh on order in Hyderabad.
           </motion.p>
@@ -229,18 +232,18 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6"
+            className="flex flex-col space-y-3 md:flex-row md:space-y-0 md:space-x-6 w-full max-w-md md:max-w-none md:w-auto px-4 md:px-0"
           >
-            <Button to="/shop" variant="primary" className="hover:scale-105 transition-transform duration-300">Shop The Collection</Button>
-            <Button to="/about" variant="outline" className="hover:scale-105 transition-transform duration-300">Discover The Ritual</Button>
+            <Button to="/shop" variant="primary" className="hover:scale-105 transition-transform duration-300 w-full md:w-auto">Shop The Collection</Button>
+            <Button to="/about" variant="outline" className="hover:scale-105 transition-transform duration-300 w-full md:w-auto">Discover The Ritual</Button>
           </motion.div>
 
-          {/* Scroll Indicator */}
+          {/* Scroll Indicator — relative positioning to avoid clipping */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-cream-dim flex flex-col items-center gap-2"
+            className="mt-8 md:mt-12 text-cream-dim flex flex-col items-center gap-2 pb-8"
           >
             <span className="text-[10px] uppercase tracking-widest">Scroll</span>
             <ArrowDown className="animate-bounce" size={20} />
@@ -254,13 +257,13 @@ const Home: React.FC = () => {
         bgType="video"
         overlayOpacity="bg-obsidian/60"
       >
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl">
             <span className="text-gold text-sm font-bold uppercase tracking-widest mb-4 block">The Philosophy</span>
-            <h2 className="text-4xl md:text-6xl font-serif text-cream mb-8 leading-tight">
+            <h2 className="text-3xl md:text-6xl font-serif text-cream mb-6 md:mb-8 leading-tight">
               The Art of the <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-amber-600">Morning Ritual</span>
             </h2>
-            <p className="text-cream-dim text-xl leading-relaxed mb-10 max-w-2xl">
+            <p className="text-cream-dim text-base md:text-xl leading-relaxed mb-8 md:mb-10 max-w-2xl">
               We believe coffee is not fuel. It is a moment of pause. A sensory experience that demands respect.
               At Avera, we source the finest beans from Indian high-altitude estates and roast them only after you place your order.
             </p>
@@ -362,7 +365,7 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="text-4xl md:text-7xl font-serif text-white mb-10 drop-shadow-2xl"
+            className="text-3xl md:text-7xl font-serif text-white mb-8 md:mb-10 drop-shadow-2xl leading-tight"
           >
             "Your Morning Is Not A Routine.<br /> It Is A Ritual."
           </motion.h2>
@@ -388,7 +391,7 @@ const Home: React.FC = () => {
                   className="w-full h-full object-cover shadow-2xl"
                   loading="lazy"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-obsidian text-gold p-8 shadow-xl">
+                <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-obsidian text-gold p-6 md:p-8 shadow-xl">
                   <p className="text-3xl font-serif font-bold">15%</p>
                   <p className="text-xs uppercase tracking-widest">Savings</p>
                 </div>

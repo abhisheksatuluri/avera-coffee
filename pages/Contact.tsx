@@ -4,7 +4,7 @@ import Button from '../components/Button';
 
 const Contact: React.FC = () => {
    return (
-      <div className="bg-obsidian min-h-screen pt-24 relative">
+      <div className="bg-obsidian min-h-screen pt-20 relative">
          {/* Subtle global texture */}
          <div className="fixed inset-0 pointer-events-none z-0">
             <img
@@ -16,7 +16,7 @@ const Contact: React.FC = () => {
          </div>
 
          {/* Hero with texture background */}
-         <div className="relative overflow-hidden mb-16 z-10">
+         <div className="relative overflow-hidden mb-12 md:mb-16 z-10">
             <img
                src="/Coffee Beans Texture Background.jpeg"
                alt="Coffee Beans Texture"
@@ -24,9 +24,9 @@ const Contact: React.FC = () => {
                loading="eager"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-obsidian/80 via-obsidian/40 to-obsidian"></div>
-            <div className="relative z-10 container mx-auto px-6 py-20 text-center">
-               <h1 className="text-4xl md:text-5xl font-serif text-cream mb-4">Get in Touch</h1>
-               <p className="text-cream-dim max-w-lg mx-auto">
+            <div className="relative z-10 container mx-auto px-4 md:px-6 py-16 md:py-20 text-center">
+               <h1 className="text-3xl md:text-5xl font-serif text-cream mb-4">Get in Touch</h1>
+               <p className="text-cream-dim max-w-lg mx-auto text-sm md:text-base">
                   Whether you have a question about brewing, need help with your subscription, or just want to talk coffee, we're here.
                </p>
             </div>

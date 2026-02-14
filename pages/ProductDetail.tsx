@@ -22,7 +22,7 @@ const ProductDetail: React.FC = () => {
    }
 
    return (
-      <div className="bg-obsidian min-h-screen pt-24 md:pt-32 pb-20 relative">
+      <div className="bg-obsidian min-h-screen pt-20 md:pt-32 pb-20 relative">
          {/* Global subtle texture */}
          <div className="fixed inset-0 pointer-events-none z-0">
             <img
@@ -33,7 +33,7 @@ const ProductDetail: React.FC = () => {
             />
          </div>
 
-         <div className="container mx-auto px-6 relative z-10">
+         <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="flex flex-col lg:flex-row gap-16">
 
                {/* Left: Gallery */}

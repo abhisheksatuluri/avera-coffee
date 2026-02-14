@@ -12,7 +12,7 @@ const Shop: React.FC = () => {
       : PRODUCTS.filter(p => p.roastLevel === activeFilter);
 
    return (
-      <div className="bg-obsidian min-h-screen pt-24 relative">
+      <div className="bg-obsidian min-h-screen pt-20 relative">
          {/* Subtle global grain texture */}
          <div className="fixed inset-0 pointer-events-none z-0">
             <img
@@ -39,8 +39,8 @@ const Shop: React.FC = () => {
             />
             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-obsidian/40 via-transparent to-obsidian/80">
                <div className="text-center">
-                  <h1 className="text-4xl md:text-5xl font-serif text-cream mb-4">Our Collection</h1>
-                  <p className="text-cream-dim tracking-widest uppercase text-sm">Small Batch. Hand Roasted.</p>
+                  <h1 className="text-3xl md:text-5xl font-serif text-cream mb-4">Our Collection</h1>
+                  <p className="text-cream-dim tracking-widest uppercase text-xs md:text-sm">Small Batch. Hand Roasted.</p>
                </div>
             </div>
          </div>
