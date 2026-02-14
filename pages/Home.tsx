@@ -190,7 +190,7 @@ const Home: React.FC = () => {
         <img
           src="/Logo.jpeg"
           alt="Avera Logo"
-          className="h-12 w-12 md:h-16 md:w-16 rounded-full shadow-2xl object-cover"
+          className="h-16 w-16 md:h-16 md:w-16 rounded-full shadow-2xl object-cover"
         />
         <div className="flex flex-col text-left drop-shadow-lg">
           <span className="text-2xl md:text-4xl font-serif font-bold tracking-widest text-cream leading-none mb-1">AVERA</span>
@@ -210,7 +210,7 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-4xl md:text-7xl font-serif font-bold text-cream mb-8 leading-tight max-w-5xl drop-shadow-2xl mt-40 md:mt-[28vh]"
+            className="text-4xl md:text-7xl font-serif font-bold text-cream mb-8 leading-tight max-w-5xl drop-shadow-2xl mt-24 md:mt-[28vh]"
           >
             Precision Roasted. <br />
             <span className="text-gold italic">Crafted For Those Who Refuse Average.</span>
