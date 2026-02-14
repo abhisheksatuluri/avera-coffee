@@ -103,7 +103,8 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-obsidian z-40 flex flex-col items-center justify-center space-y-8 transition-transform duration-500 ease-in-out md:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed inset-0 bg-obsidian z-[60] flex flex-col items-center justify-center space-y-8 transition-transform duration-500 ease-in-out md:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        style={{ backgroundColor: '#0B0B0D' }}
       >
         {NAV_ITEMS.map((item) => (
           <Link
