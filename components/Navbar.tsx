@@ -40,16 +40,16 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled ? 'bg-obsidian/95 backdrop-blur-md py-4 border-b border-white/5' : 'bg-transparent py-6'}`}
     >
-      <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-3 items-center h-full">
+      <div className="container mx-auto px-6 flex md:grid md:grid-cols-3 items-center justify-between">
 
-        {/* Left Nav (Desktop) */}
+        {/* Left Nav (Desktop only) */}
         <div className="hidden md:flex items-center justify-start gap-8">
           <Link to="/shop" className="text-sm uppercase tracking-widest text-cream-dim hover:text-gold transition-colors duration-300">Shop</Link>
           <Link to="/about" className="text-sm uppercase tracking-widest text-cream-dim hover:text-gold transition-colors duration-300">Our Craft</Link>
         </div>
 
-        {/* Center Logo/Brand */}
-        <div className="flex justify-start md:justify-center">
+        {/* Center Logo/Brand (Desktop only — mobile uses hero brand morph) */}
+        <div className="hidden md:flex justify-center">
           <Link
             to="/"
             className={`flex items-center gap-3 hover:opacity-80 transition-opacity ${hideLogoOnHome ? 'opacity-0 pointer-events-none duration-700' : 'opacity-100 duration-300'}`}
@@ -63,6 +63,17 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
           </Link>
         </div>
 
+        {/* Mobile: Logo on left */}
+        <div className="md:hidden">
+          <Link
+            to="/"
+            className={`flex items-center gap-2 hover:opacity-80 transition-opacity ${hideLogoOnHome ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+          >
+            <img src="/Logo.jpeg" alt="Avera" className="h-8 w-8 rounded-full shadow-md object-cover" />
+            <span className="text-lg font-serif font-bold tracking-widest text-cream leading-none">AVERA</span>
+          </Link>
+        </div>
+
         {/* Right Nav (Desktop) + Icons */}
         <div className="flex items-center justify-end gap-8">
           <div className="hidden md:flex items-center gap-8">
@@ -70,7 +81,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
             <Link to="/contact" className="text-sm uppercase tracking-widest text-cream-dim hover:text-gold transition-colors duration-300">Contact</Link>
           </div>
 
-          {/* Divider */}
+          {/* Divider (Desktop only) */}
           <div className="hidden md:block w-px h-6 bg-white/10 mx-2"></div>
 
           <div className="flex items-center gap-6">
