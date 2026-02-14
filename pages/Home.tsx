@@ -125,7 +125,7 @@ const Home: React.FC = () => {
     window.dispatchEvent(new CustomEvent('avera-scroll', { detail: scrollTop }));
 
     if (isMobile) {
-      const startTop = 40; // % from top — well below navbar
+      const startTop = 35; // % from top — moved up from 40%
       const endTop = 5;    // % from top (centered in 64px navbar)
       const startScale = 1.0;
       const endScale = 0.55;
@@ -192,11 +192,11 @@ const Home: React.FC = () => {
         <img
           src="/Logo.jpeg"
           alt="Avera Logo"
-          className="h-16 w-16 md:h-16 md:w-16 rounded-full shadow-2xl object-cover"
+          className="h-24 w-24 md:h-16 md:w-16 rounded-full shadow-2xl object-cover"
         />
         <div className="flex flex-col text-left drop-shadow-lg">
-          <span className="text-2xl md:text-4xl font-serif font-bold tracking-widest text-cream leading-none mb-1">AVERA</span>
-          <span className="text-[0.55rem] md:text-xs uppercase tracking-[0.2em] text-gold font-medium">Specialty Coffee</span>
+          <span className="text-3xl md:text-4xl font-serif font-bold tracking-widest text-cream leading-none mb-1">AVERA</span>
+          <span className="text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-gold font-medium">Specialty Coffee</span>
         </div>
       </div>
 
@@ -213,7 +213,7 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-3xl sm:text-4xl md:text-7xl font-serif font-bold text-cream mb-6 md:mb-8 leading-tight max-w-5xl drop-shadow-2xl mt-[55vh] md:mt-[45vh]"
+            className="text-3xl sm:text-4xl md:text-7xl font-serif font-bold text-cream mb-6 md:mb-8 leading-tight max-w-5xl drop-shadow-2xl mt-[45vh] md:mt-[45vh]"
           >
             Precision Roasted. <br />
             <span className="text-gold italic">Crafted For Those Who Refuse Average.</span>
