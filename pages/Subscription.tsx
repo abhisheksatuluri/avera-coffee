@@ -30,7 +30,7 @@ const Subscription: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-obsidian/60 via-transparent to-obsidian"></div>
             <div className="relative z-10 text-center container mx-auto px-6 py-24">
                <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4">The Avera Club</span>
-               <h1 className="text-3xl md:text-6xl font-serif text-cream mb-6">Better Coffee.<br />On Autopilot.</h1>
+               <h1 className="text-3xl md:text-6xl font-serif text-cream mb-6">Better Coffee.<br />Curated for you.</h1>
                <p className="text-cream-dim max-w-xl mx-auto text-base md:text-lg">
                   Skip the supermarket stale beans. Get estate-level freshness delivered to your door at a schedule that suits you.
                </p>
@@ -61,7 +61,7 @@ const Subscription: React.FC = () => {
                   <div className="text-center p-8 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors duration-300">
                      <div className="text-4xl text-white/20 font-serif mb-4">03</div>
                      <h3 className="text-xl text-cream font-serif mb-4">We Roast & Ship</h3>
-                     <p className="text-sm text-cream-dim">Your coffee is roasted 24 hours before it ships. Guaranteed.</p>
+                     <p className="text-sm text-cream-dim">Your coffee is freshly roasted and shipped with guaranteed quality.</p>
                   </div>
                </div>
             </div>
@@ -122,7 +122,7 @@ const Subscription: React.FC = () => {
                            <tr>
                               <td className="p-4 text-cream">Price per bag</td>
                               <td className="p-4 text-cream-dim">MRP</td>
-                              <td className="p-4 text-cream">15% Off</td>
+                              <td className="p-4 text-cream">10% Off</td>
                            </tr>
                            <tr>
                               <td className="p-4 text-cream">Shipping</td>
@@ -131,8 +131,8 @@ const Subscription: React.FC = () => {
                            </tr>
                            <tr>
                               <td className="p-4 text-cream">Roast Priority</td>
-                              <td className="p-4 text-cream-dim">Standard Queue</td>
-                              <td className="p-4 text-cream">First Batch Priority</td>
+                              <td className="p-4 text-cream-dim">Freshly Roasted</td>
+                              <td className="p-4 text-cream">Freshly Roasted</td>
                            </tr>
                            <tr>
                               <td className="p-4 text-cream">Exclusive Lots</td>

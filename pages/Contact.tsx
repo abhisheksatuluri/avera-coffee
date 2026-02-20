@@ -1,5 +1,4 @@
 import React from 'react';
-import Section from '../components/Section';
 import Button from '../components/Button';
 
 const Contact: React.FC = () => {
@@ -36,12 +35,8 @@ const Contact: React.FC = () => {
             <div className="w-full md:w-1/2">
                <div className="space-y-8">
                   <div>
-                     <h3 className="text-gold text-xs uppercase tracking-widest font-bold mb-2">Visit The Roastery</h3>
-                     <p className="text-cream text-sm">Plot 45, Jubilee Hills Road No. 10<br />Hyderabad, Telangana 500033</p>
-                  </div>
-                  <div>
                      <h3 className="text-gold text-xs uppercase tracking-widest font-bold mb-2">Email Us</h3>
-                     <p className="text-cream text-sm">hello@averacoffee.com</p>
+                     <p className="text-cream text-sm">info@averacoffee.com</p>
                   </div>
                   <div>
                      <h3 className="text-gold text-xs uppercase tracking-widest font-bold mb-2">Wholesale Inquiries</h3>
@@ -78,20 +73,6 @@ const Contact: React.FC = () => {
                </form>
             </div>
          </div>
-
-         {/* Slow Pour Ritual image as ambient footer */}
-         <Section className="py-0 h-[400px] w-full relative overflow-hidden z-10">
-            <img
-               src="/Slow Pour Ritual.jpeg"
-               alt="Slow Pour Ritual"
-               className="absolute inset-0 w-full h-full object-cover opacity-30"
-               loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-obsidian/80"></div>
-            <div className="relative z-10 w-full h-full flex items-center justify-center">
-               <p className="text-cream-dim font-serif text-xl tracking-widest uppercase">Hyderabad Roastery</p>
-            </div>
-         </Section>
       </div>
    );
 };

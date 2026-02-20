@@ -8,6 +8,51 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* GPU-accelerate parallax and animated elements */
+.parallax-bg,
+[style*="will-change"] {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Lazy render off-screen sections for performance */
+section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100vh;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize video and image rendering */
+video,
+img {
+  image-rendering: auto;
+}
+
+/* Smooth overscroll behavior */
+body {
+  overscroll-behavior: none;
 }

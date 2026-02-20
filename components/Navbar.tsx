@@ -119,24 +119,27 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
       <div
         className={`fixed inset-0 z-[60] flex flex-col items-center justify-center space-y-10 transition-transform duration-500 ease-in-out md:hidden bg-[#0B0B0D] ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
-        {/* Close button at top-right of overlay */}
+        {/* Close button at top-right of overlay — well-separated from content */}
         <button
-          className="absolute top-4 right-4 text-cream hover:text-gold transition-colors flex items-center justify-center w-11 h-11"
+          className="absolute top-5 right-5 text-cream hover:text-gold transition-colors flex items-center justify-center w-12 h-12 z-[70]"
           onClick={() => setIsMobileMenuOpen(false)}
           aria-label="Close menu"
         >
           <X strokeWidth={1.5} size={28} />
         </button>
 
-        {NAV_ITEMS.map((item) => (
-          <Link
-            key={item.path}
-            to={item.path}
-            className="text-2xl font-serif text-cream hover:text-gold transition-colors tracking-wide"
-          >
-            {item.label}
-          </Link>
-        ))}
+        {/* Nav items — centered with safe padding to avoid close button overlap */}
+        <div className="flex flex-col items-center space-y-10 pt-16">
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className="text-2xl font-serif text-cream hover:text-gold transition-colors tracking-wide"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
       </div>
     </nav>
   );

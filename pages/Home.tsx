@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import Section from '../components/Section';
 import Button from '../components/Button';
@@ -113,55 +113,59 @@ const Home: React.FC = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const handleScroll = React.useCallback(() => {
-    const container = containerRef.current;
-    let scrollTop = window.scrollY;
-    if (container && container.scrollTop > 0) {
-      scrollTop = container.scrollTop;
-    } else if (container && !isMobile && window.scrollY === 0) {
-      scrollTop = container.scrollTop;
-    }
-    // Dispatch for Navbar blur
-    window.dispatchEvent(new CustomEvent('avera-scroll', { detail: scrollTop }));
+  const rafRef = useRef<number | null>(null);
 
-    if (isMobile) {
-      const startTop = 35; // % from top — moved up from 40%
-      const endTop = 5;    // % from top (centered in 64px navbar)
-      const startScale = 1.0;
-      const endScale = 0.55;
-      const travelPx = 200;
-      const p = Math.min(Math.max(scrollTop / travelPx, 0), 1);
-      // Ease-out for smoothness
-      const ease = 1 - Math.pow(1 - p, 3);
-      setBrandStyle({
-        position: 'fixed',
-        left: '50%',
-        top: `${startTop - ease * (startTop - endTop)}%`,
-        transform: `translate(-50%, -50%) scale(${startScale - ease * (startScale - endScale)})`,
-        zIndex: 49, // Below navbar (z-50) so it docks under it
-        width: 'max-content',
-        pointerEvents: 'none',
-      });
-    } else {
-      const startTopPx = window.innerHeight * 0.30;
-      const endTopPx = 32; // navbar vertical center
-      const startScale = 1.4;
-      const endScale = 0.65;
-      const travelPx = startTopPx - endTopPx; // total scroll distance to dock
-      const p = Math.min(Math.max(scrollTop / travelPx, 0), 1);
-      // Ease-out cubic for refined feel
-      const ease = 1 - Math.pow(1 - p, 3);
-      const currentTop = startTopPx - scrollTop; // 1:1 sticky for vertical
-      setBrandStyle({
-        position: 'fixed',
-        left: '50%',
-        top: `${Math.max(currentTop, endTopPx)}px`,
-        transform: `translate(-50%, -50%) scale(${startScale - ease * (startScale - endScale)})`,
-        zIndex: 49, // Below navbar (z-50) so it docks under it
-        width: 'max-content',
-        pointerEvents: 'none',
-      });
-    }
+  const handleScroll = React.useCallback(() => {
+    if (rafRef.current) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      const container = containerRef.current;
+      let scrollTop = window.scrollY;
+      if (container && container.scrollTop > 0) {
+        scrollTop = container.scrollTop;
+      } else if (container && !isMobile && window.scrollY === 0) {
+        scrollTop = container.scrollTop;
+      }
+      // Dispatch for Navbar blur
+      window.dispatchEvent(new CustomEvent('avera-scroll', { detail: scrollTop }));
+
+      if (isMobile) {
+        const startTop = 35;
+        const endTop = 5;
+        const startScale = 1.0;
+        const endScale = 0.55;
+        const travelPx = 200;
+        const p = Math.min(Math.max(scrollTop / travelPx, 0), 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        setBrandStyle({
+          position: 'fixed',
+          left: '50%',
+          top: `${startTop - ease * (startTop - endTop)}%`,
+          transform: `translate(-50%, -50%) scale(${startScale - ease * (startScale - endScale)})`,
+          zIndex: 49,
+          width: 'max-content',
+          pointerEvents: 'none',
+        });
+      } else {
+        const startTopPx = window.innerHeight * 0.30;
+        const endTopPx = 32;
+        const startScale = 1.4;
+        const endScale = 0.65;
+        const travelPx = startTopPx - endTopPx;
+        const p = Math.min(Math.max(scrollTop / travelPx, 0), 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        const currentTop = startTopPx - scrollTop;
+        setBrandStyle({
+          position: 'fixed',
+          left: '50%',
+          top: `${Math.max(currentTop, endTopPx)}px`,
+          transform: `translate(-50%, -50%) scale(${startScale - ease * (startScale - endScale)})`,
+          zIndex: 49,
+          width: 'max-content',
+          pointerEvents: 'none',
+        });
+      }
+    });
   }, [isMobile]);
 
   useEffect(() => {
@@ -261,7 +265,7 @@ const Home: React.FC = () => {
           <div className="max-w-4xl">
             <span className="text-gold text-sm font-bold uppercase tracking-widest mb-4 block">The Philosophy</span>
             <h2 className="text-3xl md:text-6xl font-serif text-cream mb-6 md:mb-8 leading-tight">
-              The Art of the <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-amber-600">Morning Ritual</span>
+              The Art of the <br /><span className="text-gold">Morning Ritual</span>
             </h2>
             <p className="text-cream-dim text-base md:text-xl leading-relaxed mb-8 md:mb-10 max-w-2xl">
               We believe coffee is not fuel. It is a moment of pause. A sensory experience that demands respect.
@@ -392,7 +396,7 @@ const Home: React.FC = () => {
                   loading="lazy"
                 />
                 <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-obsidian text-gold p-6 md:p-8 shadow-xl">
-                  <p className="text-3xl font-serif font-bold">15%</p>
+                  <p className="text-3xl font-serif font-bold">10%</p>
                   <p className="text-xs uppercase tracking-widest">Savings</p>
                 </div>
               </div>
