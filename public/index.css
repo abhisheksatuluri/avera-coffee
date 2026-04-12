@@ -18,20 +18,8 @@ html {
   -webkit-overflow-scrolling: touch;
 }
 
-/* GPU-accelerate parallax and animated elements */
-.parallax-bg,
-[style*="will-change"] {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
 
-/* Lazy render off-screen sections for performance */
-section:not(:first-child) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 100vh;
-}
+/* GPU-accelerate parallax backgrounds removed — no longer needed */
 
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
