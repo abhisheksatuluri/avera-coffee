@@ -8,18 +8,13 @@
   box-sizing: border-box;
 }
 
-html,
 body {
   overflow-x: hidden;
 }
 
 html {
   scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
 }
-
-
-/* GPU-accelerate parallax backgrounds removed — no longer needed */
 
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
@@ -32,15 +27,4 @@ html {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Optimize video and image rendering */
-video,
-img {
-  image-rendering: auto;
-}
-
-/* Smooth overscroll behavior */
-body {
-  overscroll-behavior: none;
 }

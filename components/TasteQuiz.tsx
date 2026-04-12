@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { QUIZ_STEPS, QUIZ_BLEND_MAP, PRODUCTS } from '../constants';
 import { QuizAnswer } from '../types';
 import { submitLead } from '../utils/leadCapture';
 import { getWhatsAppLink } from '../utils/whatsapp';
-
-const slideVariants = {
-  enter: { x: 80, opacity: 0 },
-  center: { x: 0, opacity: 1 },
-  exit: { x: -80, opacity: 0 },
-};
 
 const TasteQuiz: React.FC = () => {
   const [started, setStarted] = useState(false);
@@ -33,16 +26,14 @@ const TasteQuiz: React.FC = () => {
   };
 
   const handleOptionSelect = (stepId: string, value: string) => {
-    const updated = { ...answers, [stepId]: value };
-    setAnswers(updated);
-
+    setAnswers({ ...answers, [stepId]: value });
     setTimeout(() => {
       if (currentStep < totalSteps - 1) {
         setCurrentStep(prev => prev + 1);
       } else {
         setShowLeadForm(true);
       }
-    }, 400);
+    }, 300);
   };
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
@@ -51,9 +42,7 @@ const TasteQuiz: React.FC = () => {
     setSubmitting(true);
     const product = getRecommendedProduct();
     await submitLead({
-      name,
-      email,
-      phone,
+      name, email, phone,
       recommendedBlend: product.name,
       quizAnswers: answers,
       source: 'quiz',
@@ -62,15 +51,10 @@ const TasteQuiz: React.FC = () => {
     setShowResult(true);
   };
 
-  // INTRO SCREEN
+  // INTRO
   if (!started) {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center max-w-2xl mx-auto py-12"
-      >
+      <div className="text-center max-w-2xl mx-auto py-12">
         <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4">Personalized For You</span>
         <h2 className="text-3xl md:text-5xl font-serif text-cream mb-6 leading-tight">
           Discover Your <br /><span className="text-gold italic">Perfect Blend</span>
@@ -80,32 +64,26 @@ const TasteQuiz: React.FC = () => {
         </p>
         <button
           onClick={() => setStarted(true)}
-          className="bg-gold text-obsidian font-bold py-4 px-10 text-sm uppercase tracking-widest hover:bg-gold/90 transition-all duration-300 hover:scale-105"
+          className="bg-gold text-obsidian font-bold py-4 px-10 text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors"
         >
           Take The Quiz
         </button>
         <p className="text-cream-dim/50 text-xs mt-6 uppercase tracking-wider">60 seconds • 3 questions</p>
-      </motion.div>
+      </div>
     );
   }
 
-  // RESULT SCREEN
+  // RESULT
   if (showResult) {
     const product = getRecommendedProduct();
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-        className="max-w-3xl mx-auto py-8"
-      >
+      <div className="max-w-3xl mx-auto py-8">
         <div className="text-center mb-10">
           <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4">Your Perfect Match</span>
           <h2 className="text-3xl md:text-5xl font-serif text-cream mb-4">
             The <span className="text-gold italic">{product.name}</span>
           </h2>
         </div>
-
         <div className="flex flex-col md:flex-row gap-10 items-center">
           <div className="w-full md:w-1/2">
             <div className="aspect-[4/5] overflow-hidden bg-espresso">
@@ -138,135 +116,84 @@ const TasteQuiz: React.FC = () => {
                 </svg>
                 Order on WhatsApp
               </a>
-              <a
-                href="#/shop"
-                className="w-full border border-white/20 text-cream font-bold py-4 text-center text-sm uppercase tracking-widest hover:border-gold hover:text-gold transition-colors"
-              >
+              <a href="#/shop" className="w-full border border-white/20 text-cream font-bold py-4 text-center text-sm uppercase tracking-widest hover:border-gold hover:text-gold transition-colors">
                 Explore All Blends
               </a>
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     );
   }
 
-  // LEAD CAPTURE FORM
+  // LEAD FORM
   if (showLeadForm) {
     return (
-      <motion.div
-        initial={{ opacity: 0, x: 80 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-md mx-auto py-12 text-center"
-      >
-        {/* Progress bar */}
+      <div className="max-w-md mx-auto py-12 text-center">
         <div className="w-full h-0.5 bg-white/10 mb-12">
-          <div className="h-full bg-gold transition-all duration-500" style={{ width: '100%' }} />
+          <div className="h-full bg-gold" style={{ width: '100%' }} />
         </div>
-
         <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4">Almost There</span>
         <h3 className="text-2xl md:text-3xl font-serif text-cream mb-3">Let's Personalize Your Match</h3>
         <p className="text-cream-dim text-sm mb-10">Share your details and we'll reveal your perfect blend.</p>
-
         <form onSubmit={handleLeadSubmit} className="space-y-4 text-left">
           <div>
             <label className="block text-xs uppercase tracking-widest text-cream-dim mb-2">Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={e => setName(e.target.value)}
-              required
-              className="w-full bg-obsidian border border-white/10 p-4 text-cream placeholder-cream-dim/50 text-sm focus:border-gold focus:outline-none transition-colors"
-              placeholder="Your name"
-            />
+            <input type="text" value={name} onChange={e => setName(e.target.value)} required
+              className="w-full bg-obsidian border border-white/10 p-4 text-cream placeholder-cream-dim/50 text-sm focus:border-gold focus:outline-none transition-colors" placeholder="Your name" />
           </div>
           <div>
             <label className="block text-xs uppercase tracking-widest text-cream-dim mb-2">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-              className="w-full bg-obsidian border border-white/10 p-4 text-cream placeholder-cream-dim/50 text-sm focus:border-gold focus:outline-none transition-colors"
-              placeholder="your@email.com"
-            />
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} required
+              className="w-full bg-obsidian border border-white/10 p-4 text-cream placeholder-cream-dim/50 text-sm focus:border-gold focus:outline-none transition-colors" placeholder="your@email.com" />
           </div>
           <div>
             <label className="block text-xs uppercase tracking-widest text-cream-dim mb-2">Phone</label>
-            <input
-              type="tel"
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
-              required
-              className="w-full bg-obsidian border border-white/10 p-4 text-cream placeholder-cream-dim/50 text-sm focus:border-gold focus:outline-none transition-colors"
-              placeholder="+91 XXXXX XXXXX"
-            />
+            <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} required
+              className="w-full bg-obsidian border border-white/10 p-4 text-cream placeholder-cream-dim/50 text-sm focus:border-gold focus:outline-none transition-colors" placeholder="+91 XXXXX XXXXX" />
           </div>
-          <button
-            type="submit"
-            disabled={submitting}
-            className="w-full bg-gold text-obsidian font-bold py-4 text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors mt-6 disabled:opacity-50"
-          >
+          <button type="submit" disabled={submitting}
+            className="w-full bg-gold text-obsidian font-bold py-4 text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors mt-6 disabled:opacity-50">
             {submitting ? 'Revealing...' : 'Reveal My Blend'}
           </button>
         </form>
-      </motion.div>
+      </div>
     );
   }
 
   // QUIZ STEPS
   const step = QUIZ_STEPS[currentStep];
-
   return (
     <div className="max-w-2xl mx-auto py-12">
-      {/* Progress bar */}
       <div className="w-full h-0.5 bg-white/10 mb-12">
-        <div
-          className="h-full bg-gold transition-all duration-500 ease-out"
-          style={{ width: `${progress}%` }}
-        />
+        <div className="h-full bg-gold transition-all duration-500 ease-out" style={{ width: `${progress}%` }} />
       </div>
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={step.id}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
-          className="text-center"
-        >
-          <p className="text-gold text-xs font-bold uppercase tracking-widest mb-4">
-            Question {currentStep + 1} of {totalSteps}
-          </p>
-          <h3 className="text-2xl md:text-4xl font-serif text-cream mb-3">{step.question}</h3>
-          <p className="text-cream-dim text-sm mb-10">{step.subtitle}</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {step.options.map(option => {
-              const isSelected = answers[step.id] === option.value;
-              return (
-                <button
-                  key={option.value}
-                  onClick={() => handleOptionSelect(step.id, option.value)}
-                  className={`p-6 border text-left transition-all duration-300 group hover:border-gold/50 hover:bg-gold/5 ${
-                    isSelected
-                      ? 'border-gold bg-gold/10 scale-[0.98]'
-                      : 'border-white/10 bg-white/[0.02]'
-                  }`}
-                >
-                  <span className="text-2xl mb-3 block">{option.icon}</span>
-                  <span className={`text-sm font-medium block ${isSelected ? 'text-gold' : 'text-cream group-hover:text-gold'} transition-colors`}>
-                    {option.label}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </motion.div>
-      </AnimatePresence>
+      <div className="text-center">
+        <p className="text-gold text-xs font-bold uppercase tracking-widest mb-4">
+          Question {currentStep + 1} of {totalSteps}
+        </p>
+        <h3 className="text-2xl md:text-4xl font-serif text-cream mb-3">{step.question}</h3>
+        <p className="text-cream-dim text-sm mb-10">{step.subtitle}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {step.options.map(option => {
+            const isSelected = answers[step.id] === option.value;
+            return (
+              <button
+                key={option.value}
+                onClick={() => handleOptionSelect(step.id, option.value)}
+                className={`p-6 border text-left transition-all duration-200 ${
+                  isSelected ? 'border-gold bg-gold/10' : 'border-white/10 bg-white/[0.02] hover:border-gold/50 hover:bg-gold/5'
+                }`}
+              >
+                <span className="text-2xl mb-3 block">{option.icon}</span>
+                <span className={`text-sm font-medium block ${isSelected ? 'text-gold' : 'text-cream'} transition-colors`}>
+                  {option.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
