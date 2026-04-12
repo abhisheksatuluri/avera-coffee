@@ -16,7 +16,7 @@ const Shop: React.FC = () => {
          {/* Subtle global grain texture */}
          <div className="fixed inset-0 pointer-events-none z-0">
             <img
-               src="/Floating Coffee Particles in Smoke.jpeg"
+               src="/Floating Coffee Particles in Smoke.webp"
                alt=""
                className="w-full h-full object-cover opacity-[0.02]"
                loading="lazy"
@@ -26,13 +26,13 @@ const Shop: React.FC = () => {
          {/* Header */}
          <div className="relative h-[40vh] w-full overflow-hidden mb-16 z-10">
             <img
-               src="/Coffee Beans Texture Background.jpeg"
+               src="/Coffee Beans Texture Background.webp"
                alt="Coffee Beans"
                className="absolute inset-0 w-full h-full object-cover opacity-40"
                loading="eager"
             />
             <img
-               src="/Floating Coffee Particles in Smoke.jpeg"
+               src="/Floating Coffee Particles in Smoke.webp"
                alt="Floating Particles"
                className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen"
                loading="lazy"

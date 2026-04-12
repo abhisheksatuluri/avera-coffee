@@ -56,7 +56,7 @@ const Subscription: React.FC = () => {
          {/* Steps */}
          <div className="relative overflow-hidden">
             <img
-               src="/Floating Coffee Particles in Smoke.jpeg"
+               src="/Floating Coffee Particles in Smoke.webp"
                alt=""
                className="absolute inset-0 w-full h-full object-cover opacity-[0.03]"
                loading="lazy"
@@ -89,7 +89,7 @@ const Subscription: React.FC = () => {
          {/* Image Block */}
          <div className="relative overflow-hidden">
             <img
-               src="/Coffee Beans Texture Background.jpeg"
+               src="/Coffee Beans Texture Background.webp"
                alt=""
                className="absolute inset-0 w-full h-full object-cover opacity-[0.05]"
                loading="lazy"
@@ -99,7 +99,7 @@ const Subscription: React.FC = () => {
                <div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
                   <div className="w-full md:w-1/2">
                      <img
-                        src="/Early Morning Window Ritual.jpeg"
+                        src="/Early Morning Window Ritual.webp"
                         alt="Morning Coffee Ritual"
                         className="w-full aspect-[4/3] object-cover opacity-90"
                         loading="lazy"
@@ -119,7 +119,7 @@ const Subscription: React.FC = () => {
          {/* Club Benefits + Lead Capture Form */}
          <div className="relative overflow-hidden">
             <img
-               src="/Roasting Fire Ritual.jpeg"
+               src="/Roasting Fire Ritual.webp"
                alt=""
                className="absolute inset-0 w-full h-full object-cover opacity-[0.04]"
                loading="lazy"

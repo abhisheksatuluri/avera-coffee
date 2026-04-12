@@ -6,7 +6,60 @@ import { GEMINI_SYSTEM_PROMPT } from '../constants';
 import { ChatMessage } from '../types';
 import { getWhatsAppLink } from '../utils/whatsapp';
 
-const genAI = new GoogleGenerativeAI((process as any).env.GEMINI_API_KEY || '');
+const API_KEY = (process as any).env.GEMINI_API_KEY || '';
+const genAI = new GoogleGenerativeAI(API_KEY);
+
+const MODELS_TO_TRY = ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro'];
+
+async function callGeminiWithRetry(
+  messages: ChatMessage[],
+  userText: string
+): Promise<string> {
+  const chatHistory = messages.map(m => ({
+    role: m.role === 'assistant' ? 'model' as const : 'user' as const,
+    parts: [{ text: m.content }],
+  }));
+
+  for (const modelName of MODELS_TO_TRY) {
+    try {
+      const model = genAI.getGenerativeModel({
+        model: modelName,
+        systemInstruction: GEMINI_SYSTEM_PROMPT,
+      });
+
+      const chat = model.startChat({
+        history: chatHistory.slice(0, -1),
+      });
+
+      const result = await chat.sendMessage(userText);
+      return result.response.text();
+    } catch (error: any) {
+      const isRateLimit = error?.message?.includes('429') || error?.message?.includes('quota');
+      if (isRateLimit && modelName !== MODELS_TO_TRY[MODELS_TO_TRY.length - 1]) {
+        // Try next model
+        continue;
+      }
+
+      // For rate limits on last model, wait and retry once
+      if (isRateLimit) {
+        await new Promise(r => setTimeout(r, 3000));
+        try {
+          const model = genAI.getGenerativeModel({
+            model: MODELS_TO_TRY[0],
+            systemInstruction: GEMINI_SYSTEM_PROMPT,
+          });
+          const chat = model.startChat({ history: chatHistory.slice(0, -1) });
+          const result = await chat.sendMessage(userText);
+          return result.response.text();
+        } catch {
+          throw error;
+        }
+      }
+      throw error;
+    }
+  }
+  throw new Error('All models failed');
+}
 
 const ChatBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +82,7 @@ const ChatBot: React.FC = () => {
     if (isOpen && !hasGreeted) {
       setMessages([{
         role: 'assistant',
-        content: "Welcome to Avera. I'm your coffee concierge — ask me anything about our blends, or I can help you find your perfect match.",
+        content: "Welcome to Avera. I'm your coffee concierge — ask me anything about our blends, brewing tips, or I can help you find your perfect match. What kind of coffee experience are you looking for?",
         timestamp: Date.now(),
       }]);
       setHasGreeted(true);
@@ -50,32 +103,17 @@ const ChatBot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const model = genAI.getGenerativeModel({
-        model: 'gemini-1.5-flash',
-        systemInstruction: GEMINI_SYSTEM_PROMPT,
-      });
-
-      const chatHistory = updatedMessages.map(m => ({
-        role: m.role === 'assistant' ? 'model' as const : 'user' as const,
-        parts: [{ text: m.content }],
-      }));
-
-      const chat = model.startChat({
-        history: chatHistory.slice(0, -1),
-      });
-
-      const result = await chat.sendMessage(text);
-      const response = result.response.text();
+      const response = await callGeminiWithRetry(updatedMessages, text);
 
       setMessages(prev => [...prev, {
         role: 'assistant',
         content: response,
         timestamp: Date.now(),
       }]);
-    } catch (error) {
+    } catch {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: "I'm having a little trouble connecting right now. You can reach us directly on WhatsApp — we'd love to help!",
+        content: "I'm briefly unavailable — our team is just a WhatsApp message away and would love to help you personally!",
         timestamp: Date.now(),
       }]);
     } finally {

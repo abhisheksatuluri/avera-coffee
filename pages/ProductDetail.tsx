@@ -26,7 +26,7 @@ const ProductDetail: React.FC = () => {
          {/* Global subtle texture */}
          <div className="fixed inset-0 pointer-events-none z-0">
             <img
-               src="/Floating Coffee Particles in Smoke.jpeg"
+               src="/Floating Coffee Particles in Smoke.webp"
                alt=""
                className="w-full h-full object-cover opacity-[0.02]"
                loading="lazy"
@@ -57,7 +57,7 @@ const ProductDetail: React.FC = () => {
                      </div>
                      <div className="aspect-square bg-espresso relative overflow-hidden group">
                         <img
-                           src="/Floating Coffee Particles in Smoke.jpeg"
+                           src="/Floating Coffee Particles in Smoke.webp"
                            alt="Coffee Texture"
                            className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500"
                            loading="lazy"
@@ -65,7 +65,7 @@ const ProductDetail: React.FC = () => {
                      </div>
                      <div className="aspect-square bg-espresso relative overflow-hidden group">
                         <img
-                           src="/GRID CONSISTENCY SHOT.jpeg"
+                           src="/GRID CONSISTENCY SHOT.webp"
                            alt="Product Grid"
                            className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500"
                            loading="lazy"
@@ -146,7 +146,7 @@ const ProductDetail: React.FC = () => {
             {/* Bottom Details — with texture background */}
             <div className="relative mt-32 overflow-hidden">
                <img
-                  src="/Coffee Beans Texture Background.jpeg"
+                  src="/Coffee Beans Texture Background.webp"
                   alt=""
                   className="absolute inset-0 w-full h-full object-cover opacity-[0.04]"
                   loading="lazy"

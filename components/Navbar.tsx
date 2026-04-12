@@ -20,17 +20,10 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    const handleCustomScroll = (e: Event) => {
-      const customEvent = e as CustomEvent;
-      setIsScrolled(customEvent.detail > 50);
-    };
-
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('avera-scroll', handleCustomScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('avera-scroll', handleCustomScroll);
     };
   }, []);
 
@@ -69,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
             className={`flex items-center gap-3 hover:opacity-80 transition-opacity ${hideLogoOnHome && !isScrolled ? 'opacity-0 pointer-events-none duration-700' : 'opacity-100 duration-300'}`}
             aria-hidden={hideLogoOnHome && !isScrolled}
           >
-            <img src="/Logo.jpeg" alt="Avera" className="h-10 w-10 rounded-full shadow-md object-cover" />
+            <img src="/Logo.webp" alt="Avera" className="h-10 w-10 rounded-full shadow-md object-cover" />
             <div className="flex flex-col">
               <span className="text-xl font-serif font-bold tracking-widest text-cream leading-none">AVERA</span>
               <span className="text-[0.6rem] uppercase tracking-[0.2em] text-gold font-medium">Specialty Coffee</span>
@@ -83,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
             to="/"
             className={`flex items-center gap-2 hover:opacity-80 transition-opacity ${hideLogoOnHome && !isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
           >
-            <img src="/Logo.jpeg" alt="Avera" className="h-8 w-8 rounded-full shadow-md object-cover" />
+            <img src="/Logo.webp" alt="Avera" className="h-8 w-8 rounded-full shadow-md object-cover" />
             <span className="text-lg font-serif font-bold tracking-widest text-cream leading-none">AVERA</span>
           </Link>
         </div>

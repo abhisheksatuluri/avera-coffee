@@ -118,7 +118,7 @@ const About: React.FC = () => {
 
          {/* SECTION 2: PHILOSOPHY QUOTE */}
          <ParallaxSection
-            bgSource="/Floating Coffee Particles in Smoke.jpeg"
+            bgSource="/Floating Coffee Particles in Smoke.webp"
             bgType="image"
             overlayOpacity="bg-obsidian/90"
          >
@@ -136,7 +136,7 @@ const About: React.FC = () => {
 
          {/* SECTION 3: THE HYDERABAD ROAST */}
          <ParallaxSection
-            bgSource="/Coffee Beans Texture Background.jpeg"
+            bgSource="/Coffee Beans Texture Background.webp"
             bgType="image"
             overlayOpacity="bg-espresso/85"
          >
@@ -148,7 +148,7 @@ const About: React.FC = () => {
                   className="w-full md:w-1/2"
                >
                   <img
-                     src="/Roasting Fire Ritual.jpeg"
+                     src="/Roasting Fire Ritual.webp"
                      alt="Roasting Process"
                      className="w-full aspect-[4/3] object-cover grayscale hover:grayscale-0 transition-all duration-700"
                      loading="lazy"
@@ -190,7 +190,7 @@ const About: React.FC = () => {
                      className="relative aspect-[4/3] overflow-hidden group"
                   >
                      <img
-                        src="/Farmer Silhouette.jpeg"
+                        src="/Farmer Silhouette.webp"
                         alt="Farmer at Dawn"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         loading="lazy"
@@ -205,7 +205,7 @@ const About: React.FC = () => {
                      className="relative aspect-[4/3] overflow-hidden group"
                   >
                      <img
-                        src="/Hand Holding Coffee Cherries.jpeg"
+                        src="/Hand Holding Coffee Cherries.webp"
                         alt="Hand Holding Coffee Cherries"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         loading="lazy"
@@ -219,7 +219,7 @@ const About: React.FC = () => {
 
          {/* SECTION 5: THE JOURNEY TIMELINE */}
          <ParallaxSection
-            bgSource="/Roasting Fire Ritual.jpeg"
+            bgSource="/Roasting Fire Ritual.webp"
             bgType="image"
             overlayOpacity="bg-obsidian/92"
          >

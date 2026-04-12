@@ -24,7 +24,7 @@ const Contact: React.FC = () => {
          {/* Subtle global texture */}
          <div className="fixed inset-0 pointer-events-none z-0">
             <img
-               src="/Floating Coffee Particles in Smoke.jpeg"
+               src="/Floating Coffee Particles in Smoke.webp"
                alt=""
                className="w-full h-full object-cover opacity-[0.02]"
                loading="lazy"
@@ -34,7 +34,7 @@ const Contact: React.FC = () => {
          {/* Hero with texture background */}
          <div className="relative overflow-hidden mb-12 md:mb-16 z-10">
             <img
-               src="/Coffee Beans Texture Background.jpeg"
+               src="/Coffee Beans Texture Background.webp"
                alt="Coffee Beans Texture"
                className="absolute inset-0 w-full h-full object-cover opacity-20"
                loading="eager"
@@ -78,7 +78,7 @@ const Contact: React.FC = () => {
                {/* Ambient image */}
                <div className="mt-12 aspect-[16/9] overflow-hidden">
                   <img
-                     src="/ORIGIN & CRAFT.jpeg"
+                     src="/ORIGIN & CRAFT.webp"
                      alt="Origin and Craft"
                      className="w-full h-full object-cover opacity-80 grayscale hover:grayscale-0 transition-all duration-700"
                      loading="lazy"
