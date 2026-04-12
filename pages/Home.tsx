@@ -4,6 +4,7 @@ import Section from '../components/Section';
 import Button from '../components/Button';
 import ProductCard from '../components/ProductCard';
 import { PRODUCTS, TESTIMONIALS } from '../constants';
+import TasteQuiz from '../components/TasteQuiz';
 import { ArrowDown, Flame, Clock, Truck, ChevronRight, Check } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -238,7 +239,7 @@ const Home: React.FC = () => {
             transition={{ duration: 1, delay: 0.6 }}
             className="flex flex-col space-y-3 md:flex-row md:space-y-0 md:space-x-6 w-full max-w-md md:max-w-none md:w-auto px-4 md:px-0"
           >
-            <Button to="/shop" variant="primary" className="hover:scale-105 transition-transform duration-300 w-full md:w-auto">Shop The Collection</Button>
+            <a href="#taste-quiz" className="bg-gold text-obsidian font-bold py-3 px-8 text-sm uppercase tracking-widest hover:bg-gold/90 hover:scale-105 transition-all duration-300 text-center w-full md:w-auto">Find Your Perfect Blend</a>
             <Button to="/about" variant="outline" className="hover:scale-105 transition-transform duration-300 w-full md:w-auto">Discover The Ritual</Button>
           </motion.div>
 
@@ -254,6 +255,22 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
       </ParallaxSection>
+
+      {/* SECTION: TASTE QUIZ */}
+      <section id="taste-quiz" className="relative min-h-screen md:snap-start flex items-center py-24 md:py-0 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/Coffee Beans Texture Background.jpeg"
+            alt=""
+            className="w-full h-full object-cover opacity-[0.06]"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-obsidian"></div>
+        </div>
+        <div className="container mx-auto px-6 relative z-10">
+          <TasteQuiz />
+        </div>
+      </section>
 
       {/* SECTION 2: THE RITUAL */}
       <ParallaxSection
@@ -378,7 +395,7 @@ const Home: React.FC = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <Button to="/subscription" variant="primary" className="text-lg px-10 py-4 shadow-xl hover:shadow-gold/20">Upgrade Your Mornings</Button>
+            <a href="#taste-quiz" className="bg-gold text-obsidian font-bold py-4 px-10 text-lg uppercase tracking-widest hover:bg-gold/90 shadow-xl hover:shadow-gold/20 transition-all duration-300 inline-block">Discover Your Blend</a>
           </motion.div>
         </div>
       </ParallaxSection>
@@ -413,7 +430,7 @@ const Home: React.FC = () => {
                 <li className="flex items-center gap-3"><Check size={20} className="text-amber" /> <span className="font-medium">Freshly roasted within 24h of dispatch</span></li>
                 <li className="flex items-center gap-3"><Check size={20} className="text-amber" /> <span className="font-medium">Flexible delivery schedule</span></li>
               </ul>
-              <Button to="/subscription" variant="secondary" className="bg-obsidian text-cream hover:bg-espresso hover:text-gold border-none hover:scale-105 transition-transform">Start Subscription</Button>
+              <Button to="/subscription" variant="secondary" className="bg-obsidian text-cream hover:bg-espresso hover:text-gold border-none hover:scale-105 transition-transform">Join The Club</Button>
             </div>
           </div>
         </Section>

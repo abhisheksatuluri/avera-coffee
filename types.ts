@@ -21,3 +21,35 @@ export interface NavItem {
   label: string;
   path: string;
 }
+
+export interface QuizOption {
+  label: string;
+  icon: string;
+  value: string;
+}
+
+export interface QuizStep {
+  id: string;
+  question: string;
+  subtitle: string;
+  options: QuizOption[];
+}
+
+export interface QuizAnswer {
+  [stepId: string]: string;
+}
+
+export interface LeadData {
+  name: string;
+  email: string;
+  phone: string;
+  recommendedBlend?: string;
+  quizAnswers?: QuizAnswer;
+  source: 'quiz' | 'contact' | 'chatbot' | 'subscription';
+}
+
+export interface ChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: number;
+}

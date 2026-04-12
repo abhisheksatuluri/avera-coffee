@@ -8,6 +8,7 @@ import ProductDetail from './pages/ProductDetail';
 import About from './pages/About';
 import Subscription from './pages/Subscription';
 import Contact from './pages/Contact';
+import ChatBot from './components/ChatBot';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -53,6 +54,7 @@ const AppContent: React.FC = () => {
         </Routes>
       </main>
       <Footer />
+      <ChatBot />
     </>
   );
 };
