@@ -45,44 +45,62 @@ const Shop: React.FC = () => {
             </div>
          </div>
 
-         <div className="container mx-auto px-6 pb-24 flex flex-col md:flex-row gap-12 relative z-10">
+         <div className="container mx-auto px-6 pb-24 relative z-10">
 
-            {/* Sidebar Filters */}
-            <aside className="w-full md:w-1/4 md:sticky md:top-32 md:h-fit">
-               <h3 className="text-gold uppercase tracking-widest text-sm font-bold mb-6 pb-2 border-b border-white/10">Roast Level</h3>
-               <div className="flex flex-col space-y-3">
+            {/* Mobile: Horizontal filter strip */}
+            <div className="md:hidden mb-8">
+               <div className="flex gap-2 overflow-x-auto pb-2 -mx-2 px-2">
                   {filters.map(filter => (
                      <button
                         key={filter}
                         onClick={() => setActiveFilter(filter)}
-                        className={`text-left text-sm transition-colors ${activeFilter === filter ? 'text-cream font-bold pl-2 border-l-2 border-gold' : 'text-cream-dim hover:text-cream'}`}
+                        className={`flex-shrink-0 px-4 py-2 text-xs uppercase tracking-widest border transition-colors ${activeFilter === filter ? 'border-gold text-gold bg-gold/10' : 'border-white/10 text-cream-dim'}`}
                      >
                         {filter}
                      </button>
                   ))}
                </div>
+               <p className="text-cream-dim text-sm mt-4">Showing {filteredProducts.length} results</p>
+            </div>
 
-               <h3 className="text-gold uppercase tracking-widest text-sm font-bold mt-12 mb-6 pb-2 border-b border-white/10">Grind Type</h3>
-               <div className="flex flex-col space-y-3">
-                  {['Whole Bean', 'Aeropress', 'Channi', 'Coffee Filter', 'Cold Brew', 'Commercial Espresso', 'French Press', 'Home Espresso', 'Inverted Aeropress', 'Moka Pot', 'Pourover', 'South Indian Filter', 'Turkish'].map(grind => (
-                     <label key={grind} className="flex items-center space-x-3 text-cream-dim text-sm cursor-pointer hover:text-cream">
-                        <input type="checkbox" className="accent-gold w-4 h-4" />
-                        <span>{grind}</span>
-                     </label>
-                  ))}
-               </div>
-            </aside>
-
-            {/* Product Grid */}
-            <div className="w-full md:w-3/4">
-               <Section className="py-0 md:py-0">
-                  <p className="text-cream-dim text-sm mb-6">Showing {filteredProducts.length} results</p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                     {filteredProducts.map(product => (
-                        <ProductCard key={product.id} product={product} />
+            <div className="flex flex-row gap-12">
+               {/* Desktop Sidebar Filters */}
+               <aside className="hidden md:block w-1/4 sticky top-32 h-fit">
+                  <h3 className="text-gold uppercase tracking-widest text-sm font-bold mb-6 pb-2 border-b border-white/10">Roast Level</h3>
+                  <div className="flex flex-col space-y-3">
+                     {filters.map(filter => (
+                        <button
+                           key={filter}
+                           onClick={() => setActiveFilter(filter)}
+                           className={`text-left text-sm transition-colors ${activeFilter === filter ? 'text-cream font-bold pl-2 border-l-2 border-gold' : 'text-cream-dim hover:text-cream'}`}
+                        >
+                           {filter}
+                        </button>
                      ))}
                   </div>
-               </Section>
+
+                  <h3 className="text-gold uppercase tracking-widest text-sm font-bold mt-12 mb-6 pb-2 border-b border-white/10">Grind Type</h3>
+                  <div className="flex flex-col space-y-3">
+                     {['Whole Bean', 'Aeropress', 'Channi', 'Coffee Filter', 'Cold Brew', 'Commercial Espresso', 'French Press', 'Home Espresso', 'Inverted Aeropress', 'Moka Pot', 'Pourover', 'South Indian Filter', 'Turkish'].map(grind => (
+                        <label key={grind} className="flex items-center space-x-3 text-cream-dim text-sm cursor-pointer hover:text-cream">
+                           <input type="checkbox" className="accent-gold w-4 h-4" />
+                           <span>{grind}</span>
+                        </label>
+                     ))}
+                  </div>
+               </aside>
+
+               {/* Product Grid */}
+               <div className="w-full md:w-3/4">
+                  <Section className="py-0 md:py-0">
+                     <p className="hidden md:block text-cream-dim text-sm mb-6">Showing {filteredProducts.length} results</p>
+                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {filteredProducts.map(product => (
+                           <ProductCard key={product.id} product={product} />
+                        ))}
+                     </div>
+                  </Section>
+               </div>
             </div>
          </div>
       </div>
