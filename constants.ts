@@ -14,7 +14,8 @@ export const PRODUCTS: Product[] = [
   {
     id: '1',
     name: 'Arabica Washed',
-    price: 24,
+    price: 22,
+    mrp: 28,
     description: 'Stripped to its purest expression. Our washed Arabica undergoes meticulous wet processing that removes every trace of fruit, leaving only the bean\'s true character — crystalline, precise, unapologetic. This is coffee with nothing to hide.',
     roastLevel: 'Medium',
     origin: 'Chikmagalur, India',
@@ -29,7 +30,8 @@ export const PRODUCTS: Product[] = [
   {
     id: '2',
     name: 'Arabica Natural',
-    price: 26,
+    price: 22,
+    mrp: 28,
     description: 'The whole cherry dries slowly under the Indian sun, and the bean drinks in every last drop of sweetness. The result is intoxicating — wild berry, dark wine, a finish that lingers long after the cup is empty. For those who believe restraint is overrated.',
     roastLevel: 'Medium-Dark',
     origin: 'Araku Valley, India',
@@ -45,6 +47,7 @@ export const PRODUCTS: Product[] = [
     id: '3',
     name: 'Fine Robusta',
     price: 22,
+    mrp: 28,
     description: 'Forget everything you think you know about Robusta. Grown at elevation in Chikmagalur and processed with the precision of specialty Arabica, this is a full-bodied revelation — twice the caffeine, zero compromise. Bold enough to stand alone. Strong enough to anchor any milk drink.',
     roastLevel: 'Dark',
     origin: 'Chikmagalur, India',
@@ -59,7 +62,8 @@ export const PRODUCTS: Product[] = [
   {
     id: '4',
     name: 'Red Honey Sun-Dried',
-    price: 28,
+    price: 22,
+    mrp: 28,
     description: 'Partially stripped, then laid out on raised beds where the remaining mucilage caramelizes under controlled sun exposure. The "red" honey process walks a razor\'s edge between clean and wild — the result is a cup with stone fruit sweetness and a syrupy body that feels almost indulgent.',
     roastLevel: 'Medium',
     origin: 'Coorg, India',
@@ -74,7 +78,8 @@ export const PRODUCTS: Product[] = [
   {
     id: '5',
     name: 'Black Honey Sun-Dried',
-    price: 30,
+    price: 22,
+    mrp: 28,
     description: 'The most labour-intensive process in our lineup. Nearly all the fruit mucilage stays on the bean during an extended, carefully monitored sun-drying phase. The result is dense, jammy, almost dessert-like — a cup so rich it borders on decadence. Extremely limited batches.',
     roastLevel: 'Medium-Dark',
     origin: 'Coorg, India',
@@ -89,7 +94,8 @@ export const PRODUCTS: Product[] = [
   {
     id: '6',
     name: 'Fermented Whiskey',
-    price: 34,
+    price: 22,
+    mrp: 28,
     description: 'Our most experimental and sought-after offering. Green beans undergo a proprietary anaerobic fermentation process inspired by whiskey barrel aging, developing deep boozy undertones without a drop of alcohol. The flavour profile is unlike anything in Indian specialty coffee — smoky, complex, and utterly addictive. Once it\'s gone, it\'s gone.',
     roastLevel: 'Dark',
     origin: 'Estate Reserve, India',

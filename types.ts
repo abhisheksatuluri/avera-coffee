@@ -9,6 +9,7 @@ export interface Product {
   id: string;
   name: string;
   price: number;
+  mrp: number;
   description: string;
   roastLevel: 'Light' | 'Medium' | 'Medium-Dark' | 'Dark';
   origin: string;

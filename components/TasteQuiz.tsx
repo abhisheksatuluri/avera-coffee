@@ -108,7 +108,11 @@ const TasteQuiz: React.FC = () => {
                 ))}
               </div>
             </div>
-            <p className="text-2xl text-gold font-medium">₹{Math.round(product.price * 100 * 0.25)} <span className="text-sm text-cream-dim font-normal">/ 250g</span></p>
+            <p className="text-2xl text-gold font-medium">
+              ₹{Math.round(product.price * 100 * 0.25)}
+              <span className="text-sm text-cream-dim font-normal line-through ml-2">₹{Math.round(product.mrp * 100 * 0.25)}</span>
+              <span className="text-sm text-cream-dim font-normal ml-1">/ 250g</span>
+            </p>
             <div className="flex flex-col gap-3 pt-2">
               <a
                 href={getWhatsAppLink(`Hi! I took the Avera Taste Quiz and my recommended blend is ${product.name}. I'd like to order it!`)}

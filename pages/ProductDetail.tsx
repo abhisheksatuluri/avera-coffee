@@ -118,10 +118,18 @@ const ProductDetail: React.FC = () => {
                         <span>{product.roastLevel} Roast</span>
                      </div>
                      <h1 className="text-4xl md:text-5xl font-serif text-cream mb-4">{product.name}</h1>
-                     <p className="text-2xl text-gold font-medium">
-                        ₹{Math.round(product.price * 100 * (SIZES.find(s => s.label === size)?.multiplier || 1))}
-                        <span className="text-sm text-cream-dim ml-2 font-normal">MRP (Inclusive of all taxes)</span>
-                     </p>
+                     <div className="flex items-baseline gap-3">
+                        <p className="text-2xl text-gold font-medium">
+                           ₹{Math.round(product.price * 100 * (SIZES.find(s => s.label === size)?.multiplier || 1))}
+                        </p>
+                        <p className="text-lg text-cream-dim line-through">
+                           ₹{Math.round(product.mrp * 100 * (SIZES.find(s => s.label === size)?.multiplier || 1))}
+                        </p>
+                        <span className="text-xs bg-green-900/40 text-green-400 px-2 py-0.5 font-bold">
+                           {Math.round((1 - product.price / product.mrp) * 100)}% OFF
+                        </span>
+                     </div>
+                     <p className="text-xs text-cream-dim mt-1">MRP (Inclusive of all taxes)</p>
                   </div>
 
                   <div className="prose prose-invert mb-8 text-cream-dim leading-relaxed">
