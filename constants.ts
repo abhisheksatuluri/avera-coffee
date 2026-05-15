@@ -34,7 +34,7 @@ export const PRODUCTS: Product[] = [
     mrp: 28,
     description: 'The whole cherry dries slowly under the Indian sun, and the bean drinks in every last drop of sweetness. The result is intoxicating. Wild berry, dark wine, a finish that lingers long after the cup is empty. For those who believe restraint is overrated.',
     roastLevel: 'Medium-Dark',
-    origin: 'Araku Valley, India',
+    origin: 'Yercaud, India',
     image: '/Arabica Natural.webp',
     tastingNotes: ['Blueberry', 'Dark Wine', 'Chocolate'],
     isSubscriptionAvailable: true,
@@ -163,7 +163,7 @@ PERSONALITY & TONE:
 ABOUT AVERA:
 - Avera Specialty Coffee is a luxury coffee brand that precision-roasts specialty beans fresh on order.
 - Based in Hyderabad, India. Parent company: Aditya Food and Beverages Pvt. Ltd.
-- We source directly from premium Indian estate farms. Coorg, Araku Valley, Chikmagalur.
+- We source directly from premium Indian estate farms. Coorg, Yercaud, Chikmagalur.
 - Every bag is roasted AFTER the customer orders (never pre-roasted stock), ensuring peak freshness.
 - We offer 4 grind options: Whole Bean, Aeropress, French Press, Espresso. ground to micron-level precision.
 - Delivery within 48 hours across Hyderabad and major Indian metros.
@@ -177,7 +177,7 @@ COMPLETE PRODUCT CATALOG:
    Description: Our purest expression of Arabica. Wet-processed to strip away all fruit, leaving only the bean's true character. crystalline clarity with bright citrus up front, brown sugar sweetness in the body, and a remarkably clean finish. Ideal for pour-over and Aeropress lovers who want precision in every sip.
 
 2. ARABICA NATURAL. ₹2,600
-   Roast: Medium-Dark | Origin: Araku Valley, India
+   Roast: Medium-Dark | Origin: Yercaud, India
    Tasting Notes: Blueberry, Dark Wine, Chocolate
    Description: The whole cherry dries slowly under the Indian sun, and the bean absorbs every drop of sweetness. Wild berry and dark wine notes dominate, with a chocolate undertone that lingers. Full-bodied and intoxicating. for those who want their coffee expressive and unapologetic.
 

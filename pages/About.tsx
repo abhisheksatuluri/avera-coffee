@@ -137,7 +137,7 @@ const About: React.FC = () => {
                      {
                         date: 'March 2026',
                         title: 'Direct Trade Partnerships',
-                        desc: 'Partnerships signed with 5 estate farms across Coorg, Araku Valley, and Chikmagalur. Direct sourcing means higher quality, fairer prices for farmers, and full traceability.',
+                        desc: 'Partnerships signed with 5 estate farms across Coorg, Yercaud, and Chikmagalur. Direct sourcing means higher quality, fairer prices for farmers, and full traceability.',
                         icon: '🤝',
                      },
                      {
