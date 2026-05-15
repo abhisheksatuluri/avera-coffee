@@ -2,19 +2,54 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { PRODUCTS } from '../constants';
 import Button from '../components/Button';
-import { Star, RefreshCw, Coffee } from 'lucide-react';
+import { Star, RefreshCw, Coffee, ChevronDown } from 'lucide-react';
 import { getWhatsAppLink } from '../utils/whatsapp';
+
+const SIZES = [
+   { label: '250g', multiplier: 0.25 },
+   { label: '500g', multiplier: 0.5 },
+   { label: '1kg', multiplier: 1 },
+];
+
+const GRINDS = [
+   'Whole Bean',
+   'Aeropress',
+   'Channi',
+   'Coffee Filter',
+   'Cold Brew',
+   'Commercial Espresso',
+   'French Press',
+   'Home Espresso',
+   'Inverted Aeropress',
+   'Moka Pot',
+   'Pourover',
+   'South Indian Filter',
+   'Turkish',
+];
 
 const ProductDetail: React.FC = () => {
    const { id } = useParams<{ id: string }>();
    const product = PRODUCTS.find(p => p.id === id);
+   const [size, setSize] = useState('250g');
    const [grind, setGrind] = useState('Whole Bean');
+   const [grindOpen, setGrindOpen] = useState(false);
+   const grindRef = useRef<HTMLDivElement>(null);
    const videoRef = useRef<HTMLVideoElement>(null);
 
    useEffect(() => {
       if (videoRef.current) {
          videoRef.current.play().catch(() => { });
       }
+   }, []);
+
+   useEffect(() => {
+      const handleClickOutside = (e: MouseEvent) => {
+         if (grindRef.current && !grindRef.current.contains(e.target as Node)) {
+            setGrindOpen(false);
+         }
+      };
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
    }, []);
 
    if (!product) {
@@ -83,15 +118,18 @@ const ProductDetail: React.FC = () => {
                         <span>{product.roastLevel} Roast</span>
                      </div>
                      <h1 className="text-4xl md:text-5xl font-serif text-cream mb-4">{product.name}</h1>
-                     <p className="text-xl text-gold font-medium">₹{product.price * 100}</p>
+                     <p className="text-2xl text-gold font-medium">
+                        ₹{Math.round(product.price * 100 * (SIZES.find(s => s.label === size)?.multiplier || 1))}
+                        <span className="text-sm text-cream-dim ml-2 font-normal">MRP (Inclusive of all taxes)</span>
+                     </p>
                   </div>
 
-                  <div className="prose prose-invert mb-10 text-cream-dim leading-relaxed">
+                  <div className="prose prose-invert mb-8 text-cream-dim leading-relaxed">
                      <p>{product.description}</p>
                   </div>
 
                   {/* Roast Meter */}
-                  <div className="mb-10">
+                  <div className="mb-8">
                      <p className="text-xs uppercase tracking-widest text-cream mb-3">Roast Profile</p>
                      <div className="h-1 w-full bg-white/10 rounded-full flex items-center">
                         <div className={`h-1.5 rounded-full bg-gold relative transition-all duration-500`} style={{
@@ -109,26 +147,70 @@ const ProductDetail: React.FC = () => {
                      </div>
                   </div>
 
-                  {/* Grind Selection */}
-                  <div className="mb-10">
-                     <p className="text-xs uppercase tracking-widest text-cream mb-3">Grind Option</p>
-                     <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                        {['Whole Bean', 'Aeropress', 'French Press', 'Espresso'].map(g => (
-                           <button
-                              key={g}
-                              onClick={() => setGrind(g)}
-                              className={`py-3 px-2 text-xs border transition-colors ${grind === g ? 'border-gold text-gold bg-gold/10' : 'border-white/10 text-cream-dim hover:border-white/30'}`}
-                           >
-                              {g}
-                           </button>
-                        ))}
+                  {/* Size Selection */}
+                  <div className="mb-6">
+                     <p className="text-xs uppercase tracking-widest text-cream mb-3 font-bold">Size</p>
+                     <div className="border-t border-gold/30">
+                        <div className="flex gap-3 pt-3">
+                           {SIZES.map(s => (
+                              <button
+                                 key={s.label}
+                                 onClick={() => setSize(s.label)}
+                                 className={`py-3 px-6 text-sm border transition-all duration-200 ${
+                                    size === s.label
+                                       ? 'border-gold text-gold bg-gold/10 font-medium'
+                                       : 'border-white/10 text-cream-dim hover:border-white/30 hover:text-cream'
+                                 }`}
+                              >
+                                 {s.label}
+                              </button>
+                           ))}
+                        </div>
+                     </div>
+                  </div>
+
+                  {/* Grind Selection — Dropdown */}
+                  <div className="mb-8" ref={grindRef}>
+                     <div className="flex justify-between items-center mb-3">
+                        <p className="text-xs uppercase tracking-widest text-cream font-bold">Grind</p>
+                        <a href="#/brew-guide" className="text-xs uppercase tracking-widest text-gold hover:text-gold/80 transition-colors">Grind Guide</a>
+                     </div>
+                     <div className="border-t border-gold/30 pt-3 relative">
+                        <button
+                           onClick={() => setGrindOpen(!grindOpen)}
+                           className="w-full flex items-center justify-between py-3 px-4 border border-white/10 text-cream text-sm hover:border-white/30 transition-colors bg-espresso/50"
+                        >
+                           <span className="flex items-center gap-2">
+                              {grind === 'Whole Bean' && <span className="text-gold">✓</span>}
+                              {grind}
+                           </span>
+                           <ChevronDown size={16} className={`text-cream-dim transition-transform duration-200 ${grindOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        {grindOpen && (
+                           <div className="absolute z-30 w-full mt-1 border border-white/10 bg-espresso shadow-2xl shadow-black/60 max-h-64 overflow-y-auto">
+                              {GRINDS.map(g => (
+                                 <button
+                                    key={g}
+                                    onClick={() => { setGrind(g); setGrindOpen(false); }}
+                                    className={`w-full text-left px-4 py-2.5 text-sm transition-colors flex items-center gap-2 ${
+                                       grind === g
+                                          ? 'text-gold bg-gold/10'
+                                          : 'text-cream hover:bg-white/5'
+                                    }`}
+                                 >
+                                    {grind === g && <span>✓</span>}
+                                    {g}
+                                 </button>
+                              ))}
+                           </div>
+                        )}
                      </div>
                   </div>
 
                   {/* Order Actions */}
                   <div className="flex flex-col gap-4">
                      <a
-                        href={getWhatsAppLink(`Hi! I'd like to order ${product.name} (${grind} grind) — ₹${product.price * 100}`)}
+                        href={getWhatsAppLink(`Hi! I'd like to order ${product.name} (${size}, ${grind} grind) — ₹${Math.round(product.price * 100 * (SIZES.find(s => s.label === size)?.multiplier || 1))}`)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full bg-gold text-obsidian font-bold py-4 px-6 text-center text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors flex items-center justify-center gap-3"
@@ -138,13 +220,57 @@ const ProductDetail: React.FC = () => {
                         </svg>
                         Order on WhatsApp
                      </a>
+                     <p className="text-center text-cream-dim text-xs">FREE STANDARD SHIPPING on all prepaid orders above ₹350</p>
                      <Button variant="outline" className="w-full" to="/contact">Have Questions? Get in Touch</Button>
                   </div>
                </div>
             </div>
 
+            {/* Flavor Profile */}
+            <div className="mt-24 border-t border-white/5 pt-16">
+               <h2 className="text-2xl font-serif text-cream mb-10 text-center">Flavor Profile</h2>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-4xl mx-auto">
+                  <div className="space-y-6">
+                     {(['sweetness', 'body', 'acidity', 'bitterness'] as const).map(attr => (
+                        <div key={attr}>
+                           <div className="flex justify-between items-center mb-2">
+                              <span className="text-xs uppercase tracking-widest text-cream">{attr}</span>
+                              <span className="text-xs text-cream-dim">
+                                 {product.flavorProfile[attr] <= 2 ? 'Low' : product.flavorProfile[attr] <= 3 ? 'Medium' : 'High'}
+                              </span>
+                           </div>
+                           <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                              <div
+                                 className="h-full bg-gold rounded-full transition-all duration-700"
+                                 style={{ width: `${(product.flavorProfile[attr] / 5) * 100}%` }}
+                              />
+                           </div>
+                        </div>
+                     ))}
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                     <div className="p-4 border border-white/5 bg-white/[0.02]">
+                        <p className="text-[10px] uppercase tracking-widest text-gold mb-1">Origin</p>
+                        <p className="text-cream text-sm">{product.origin}</p>
+                     </div>
+                     <div className="p-4 border border-white/5 bg-white/[0.02]">
+                        <p className="text-[10px] uppercase tracking-widest text-gold mb-1">Altitude</p>
+                        <p className="text-cream text-sm">{product.altitude || '1,000m+'}</p>
+                     </div>
+                     <div className="p-4 border border-white/5 bg-white/[0.02]">
+                        <p className="text-[10px] uppercase tracking-widest text-gold mb-1">Variety</p>
+                        <p className="text-cream text-sm">{product.variety || 'Arabica'}</p>
+                     </div>
+                     <div className="p-4 border border-white/5 bg-white/[0.02]">
+                        <p className="text-[10px] uppercase tracking-widest text-gold mb-1">Processing</p>
+                        <p className="text-cream text-sm">{product.processing || product.roastLevel}</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
             {/* Bottom Details — with texture background */}
-            <div className="relative mt-32 overflow-hidden">
+            <div className="relative mt-16 overflow-hidden">
                <img
                   src="/Coffee Beans Texture Background.webp"
                   alt=""
@@ -156,19 +282,19 @@ const ProductDetail: React.FC = () => {
                   <div>
                      <h3 className="font-serif text-xl text-cream mb-4 flex items-center gap-2"><Coffee className="text-gold" size={20} /> The Cup</h3>
                      <p className="text-cream-dim text-sm leading-relaxed">
-                        Tasting notes of {product.tastingNotes.join(', ')}. This coffee has a silky body with a lingering sweet finish.
+                        Tasting notes of {product.tastingNotes.join(', ')}. {product.flavorProfile.body >= 4 ? 'Full-bodied with a rich, lingering finish.' : product.flavorProfile.acidity >= 4 ? 'Bright and clean with a crisp finish.' : 'Balanced and smooth with a sweet finish.'}
                      </p>
                   </div>
                   <div>
                      <h3 className="font-serif text-xl text-cream mb-4 flex items-center gap-2"><RefreshCw className="text-gold" size={20} /> The Process</h3>
                      <p className="text-cream-dim text-sm leading-relaxed">
-                        Washed and sun-dried on raised beds. This careful processing ensures a clean cup with distinct flavor clarity.
+                        {product.processing} processed. {product.processing === 'Washed' ? 'Meticulously wet-processed for a clean cup with distinct flavor clarity.' : product.processing === 'Natural (Dry)' ? 'Sun-dried whole cherry on raised beds, developing deep fruit complexity.' : product.processing?.includes('Honey') ? 'Partially de-pulped and sun-dried, caramelizing the mucilage for syrupy sweetness.' : 'A proprietary process that creates a unique and complex flavor profile.'}
                      </p>
                   </div>
                   <div>
                      <h3 className="font-serif text-xl text-cream mb-4 flex items-center gap-2"><Star className="text-gold" size={20} /> The Origin</h3>
                      <p className="text-cream-dim text-sm leading-relaxed">
-                        Sourced directly from partner estates in {product.origin}. Grown under shade trees at elevations above 1200m.
+                        Sourced directly from partner estates in {product.origin}. {product.variety} grown under shade trees at {product.altitude || '1,000m+'} elevation.
                      </p>
                   </div>
                </div>

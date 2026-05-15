@@ -35,7 +35,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <h3 className="text-xl font-serif text-cream group-hover:text-gold transition-colors">{product.name}</h3>
         <div className="flex justify-between items-center border-t border-white/10 pt-2">
           <p className="text-sm text-cream-dim">{product.roastLevel} Roast</p>
-          <p className="text-lg font-medium text-gold">₹{product.price * 100}</p>
+          <p className="text-lg font-medium text-gold">₹{Math.round(product.price * 100 * 0.25)}<span className="text-xs text-cream-dim font-normal ml-1">/ 250g</span></p>
         </div>
       </div>
     </Link>

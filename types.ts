@@ -1,3 +1,10 @@
+export interface FlavorProfile {
+  sweetness: number;
+  body: number;
+  acidity: number;
+  bitterness: number;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -8,6 +15,10 @@ export interface Product {
   image: string;
   tastingNotes: string[];
   isSubscriptionAvailable: boolean;
+  flavorProfile: FlavorProfile;
+  altitude?: string;
+  variety?: string;
+  processing?: string;
 }
 
 export interface Testimonial {

@@ -8,6 +8,7 @@ import ProductDetail from './pages/ProductDetail';
 import About from './pages/About';
 import Subscription from './pages/Subscription';
 import Contact from './pages/Contact';
+import BrewGuide from './pages/BrewGuide';
 import ChatBot from './components/ChatBot';
 
 const ScrollToTop = () => {
@@ -51,6 +52,7 @@ const AppContent: React.FC = () => {
           <Route path="/about" element={<About />} />
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/brew-guide" element={<BrewGuide />} />
         </Routes>
       </main>
       <Footer />

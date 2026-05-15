@@ -43,11 +43,11 @@ const Subscription: React.FC = () => {
             >
                <source src="/the power of silence.mp4" type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-obsidian/60 via-transparent to-obsidian"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-obsidian/80 via-black/50 to-obsidian"></div>
             <div className="relative z-10 text-center container mx-auto px-6 py-24">
-               <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4">The Avera Club</span>
-               <h1 className="text-3xl md:text-6xl font-serif text-cream mb-6">Join The Avera Club</h1>
-               <p className="text-cream-dim max-w-xl mx-auto text-base md:text-lg">
+               <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4 drop-shadow-lg">The Avera Club</span>
+               <h1 className="text-3xl md:text-6xl font-serif text-white mb-6 drop-shadow-2xl">Join The Avera Club</h1>
+               <p className="text-cream max-w-xl mx-auto text-base md:text-lg drop-shadow-lg">
                   Be the first to discover new roasts, exclusive lots, and member-only offerings. Your morning ritual, elevated.
                </p>
             </div>
@@ -68,19 +68,19 @@ const Subscription: React.FC = () => {
                      <div className="text-gold mb-4 flex justify-center"><Coffee size={32} strokeWidth={1} /></div>
                      <div className="text-4xl text-white/20 font-serif mb-4">01</div>
                      <h3 className="text-xl text-cream font-serif mb-4">Take The Quiz</h3>
-                     <p className="text-sm text-cream-dim">Discover your perfect blend with our 60-second taste quiz.</p>
+                     <p className="text-sm text-cream">Discover your perfect blend with our 60-second taste quiz.</p>
                   </div>
                   <div className="text-center p-8 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors duration-300">
                      <div className="text-gold mb-4 flex justify-center"><Users size={32} strokeWidth={1} /></div>
                      <div className="text-4xl text-white/20 font-serif mb-4">02</div>
                      <h3 className="text-xl text-cream font-serif mb-4">Join The Club</h3>
-                     <p className="text-sm text-cream-dim">Get updates on new roasts, exclusive lots, and member benefits.</p>
+                     <p className="text-sm text-cream">Get updates on new roasts, exclusive lots, and member benefits.</p>
                   </div>
                   <div className="text-center p-8 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors duration-300">
                      <div className="text-gold mb-4 flex justify-center"><Mail size={32} strokeWidth={1} /></div>
                      <div className="text-4xl text-white/20 font-serif mb-4">03</div>
                      <h3 className="text-xl text-cream font-serif mb-4">Order via WhatsApp</h3>
-                     <p className="text-sm text-cream-dim">Place orders directly on WhatsApp. Fresh roasted and shipped to you.</p>
+                     <p className="text-sm text-cream">Place orders directly on WhatsApp. Fresh roasted and shipped to you.</p>
                   </div>
                </div>
             </div>
@@ -127,6 +127,46 @@ const Subscription: React.FC = () => {
             <div className="absolute inset-0 bg-espresso/95"></div>
             <Section className="relative z-10 py-24">
                <div className="container mx-auto px-6">
+                  <h2 className="text-center text-3xl font-serif text-cream mb-6">Choose Your Plan</h2>
+                  <p className="text-center text-cream-dim mb-12 max-w-xl mx-auto">The more you commit, the more you save. Cancel anytime.</p>
+
+                  {/* Subscription Tiers */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-20">
+                     <div className="p-8 border border-white/10 bg-white/[0.02] text-center">
+                        <p className="text-xs uppercase tracking-widest text-cream-dim mb-2">Monthly</p>
+                        <p className="text-4xl font-serif text-cream mb-1">3</p>
+                        <p className="text-xs text-cream-dim mb-6">Deliveries</p>
+                        <div className="bg-gold/10 border border-gold/20 py-3 px-4 mb-6">
+                           <p className="text-2xl font-bold text-gold">10% OFF</p>
+                           <p className="text-xs text-cream-dim">Every order</p>
+                        </div>
+                        <p className="text-cream-dim text-sm">Perfect for trying us out. Flexible and no-commitment.</p>
+                     </div>
+                     <div className="p-8 border-2 border-gold bg-gold/5 text-center relative">
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-obsidian px-4 py-1 text-[10px] uppercase tracking-widest font-bold">
+                           Most Popular
+                        </div>
+                        <p className="text-xs uppercase tracking-widest text-gold mb-2">Bi-Monthly</p>
+                        <p className="text-4xl font-serif text-cream mb-1">6</p>
+                        <p className="text-xs text-cream-dim mb-6">Deliveries</p>
+                        <div className="bg-gold/10 border border-gold/30 py-3 px-4 mb-6">
+                           <p className="text-2xl font-bold text-gold">15% OFF</p>
+                           <p className="text-xs text-cream-dim">Every order</p>
+                        </div>
+                        <p className="text-cream-dim text-sm">The sweet spot. Priority roasting slots and consistent freshness.</p>
+                     </div>
+                     <div className="p-8 border border-white/10 bg-white/[0.02] text-center">
+                        <p className="text-xs uppercase tracking-widest text-cream-dim mb-2">Quarterly</p>
+                        <p className="text-4xl font-serif text-cream mb-1">12</p>
+                        <p className="text-xs text-cream-dim mb-6">Deliveries</p>
+                        <div className="bg-gold/10 border border-gold/20 py-3 px-4 mb-6">
+                           <p className="text-2xl font-bold text-gold">20% OFF</p>
+                           <p className="text-xs text-cream-dim">Every order + free shipping</p>
+                        </div>
+                        <p className="text-cream-dim text-sm">For the devoted. Maximum savings plus exclusive Estate Reserve access.</p>
+                     </div>
+                  </div>
+
                   <h2 className="text-center text-3xl font-serif text-cream mb-6">What You Get</h2>
                   <p className="text-center text-cream-dim mb-16 max-w-xl mx-auto">Join a community of coffee enthusiasts who demand the finest.</p>
 

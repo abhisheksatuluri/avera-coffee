@@ -1,10 +1,11 @@
 import { Product, Testimonial, NavItem, QuizStep } from './types';
 
-export const WHATSAPP_NUMBER = '919XXXXXXXXX';
+export const WHATSAPP_NUMBER = '919087434124';
 
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Shop', path: '/shop' },
   { label: 'Our Craft', path: '/about' },
+  { label: 'Brew Guide', path: '/brew-guide' },
   { label: 'The Club', path: '/subscription' },
   { label: 'Contact', path: '/contact' },
 ];
@@ -12,47 +13,93 @@ export const NAV_ITEMS: NavItem[] = [
 export const PRODUCTS: Product[] = [
   {
     id: '1',
-    name: 'Signature Blend',
+    name: 'Arabica Washed',
     price: 24,
-    description: 'A meticulously sourced Arabica from the high-altitude plantations of Coorg. Notes of dark chocolate, caramel, and a hint of wild berries.',
-    roastLevel: 'Medium-Dark',
-    origin: 'Coorg, India',
-    image: '/AVERA Signature Blend.webp',
-    tastingNotes: ['Dark Chocolate', 'Caramel', 'Wild Berry'],
+    description: 'Stripped to its purest expression. Our washed Arabica undergoes meticulous wet processing that removes every trace of fruit, leaving only the bean\'s true character — crystalline, precise, unapologetic. This is coffee with nothing to hide.',
+    roastLevel: 'Medium',
+    origin: 'Chikmagalur, India',
+    image: '/Arabica Washed.webp',
+    tastingNotes: ['Citrus', 'Brown Sugar', 'Clean Finish'],
     isSubscriptionAvailable: true,
+    flavorProfile: { sweetness: 2, body: 2, acidity: 4, bitterness: 1 },
+    altitude: '1,100 — 1,400m',
+    variety: 'Arabica S795',
+    processing: 'Washed',
   },
   {
     id: '2',
-    name: 'Single Estate',
-    price: 28,
-    description: 'Exposed to the monsoon rains and winds, this unique processing method creates a coffee with low acidity and a heavy, creamy body.',
-    roastLevel: 'Medium',
-    origin: 'Malabar Coast, India',
-    image: '/AVERA Single Estate Arabica – Studio Hero.webp',
-    tastingNotes: ['Spices', 'Nuts', 'Earth'],
+    name: 'Arabica Natural',
+    price: 26,
+    description: 'The whole cherry dries slowly under the Indian sun, and the bean drinks in every last drop of sweetness. The result is intoxicating — wild berry, dark wine, a finish that lingers long after the cup is empty. For those who believe restraint is overrated.',
+    roastLevel: 'Medium-Dark',
+    origin: 'Araku Valley, India',
+    image: '/Arabica Natural.webp',
+    tastingNotes: ['Blueberry', 'Dark Wine', 'Chocolate'],
     isSubscriptionAvailable: true,
+    flavorProfile: { sweetness: 4, body: 4, acidity: 2, bitterness: 2 },
+    altitude: '900 — 1,100m',
+    variety: 'Arabica S795',
+    processing: 'Natural (Dry)',
   },
   {
     id: '3',
-    name: 'Starter Bundle',
-    price: 32,
-    description: 'Grown in the biodiverse Eastern Ghats, this award-winning organic coffee offers a delicate floral aroma with citrus undertones.',
-    roastLevel: 'Light',
-    origin: 'Araku Valley, India',
-    image: '/AVERA Starter Bundle.webp',
-    tastingNotes: ['Jasmine', 'Citrus', 'Honey'],
+    name: 'Fine Robusta',
+    price: 22,
+    description: 'Forget everything you think you know about Robusta. Grown at elevation in Chikmagalur and processed with the precision of specialty Arabica, this is a full-bodied revelation — twice the caffeine, zero compromise. Bold enough to stand alone. Strong enough to anchor any milk drink.',
+    roastLevel: 'Dark',
+    origin: 'Chikmagalur, India',
+    image: '/Fine Robusta.webp',
+    tastingNotes: ['Dark Cocoa', 'Walnut', 'Smoky'],
     isSubscriptionAvailable: true,
+    flavorProfile: { sweetness: 1, body: 5, acidity: 1, bitterness: 4 },
+    altitude: '800 — 1,200m',
+    variety: 'Robusta CxR',
+    processing: 'Washed',
   },
   {
     id: '4',
-    name: 'Drip Bags',
-    price: 26,
-    description: 'Our signature espresso blend. Bold, intense, and perfect for cutting through milk. Roasted fresh specifically for espresso machines.',
-    roastLevel: 'Dark',
-    origin: 'Chikmagalur Blend',
-    image: '/Coffee Drip Bags.webp',
-    tastingNotes: ['Cocoa', 'Smoke', 'Molasses'],
+    name: 'Red Honey Sun-Dried',
+    price: 28,
+    description: 'Partially stripped, then laid out on raised beds where the remaining mucilage caramelizes under controlled sun exposure. The "red" honey process walks a razor\'s edge between clean and wild — the result is a cup with stone fruit sweetness and a syrupy body that feels almost indulgent.',
+    roastLevel: 'Medium',
+    origin: 'Coorg, India',
+    image: '/Red Honey Sun-Dried.webp',
+    tastingNotes: ['Peach', 'Caramel', 'Raw Honey'],
     isSubscriptionAvailable: true,
+    flavorProfile: { sweetness: 4, body: 3, acidity: 3, bitterness: 1 },
+    altitude: '1,000 — 1,300m',
+    variety: 'Arabica Selection 9',
+    processing: 'Red Honey',
+  },
+  {
+    id: '5',
+    name: 'Black Honey Sun-Dried',
+    price: 30,
+    description: 'The most labour-intensive process in our lineup. Nearly all the fruit mucilage stays on the bean during an extended, carefully monitored sun-drying phase. The result is dense, jammy, almost dessert-like — a cup so rich it borders on decadence. Extremely limited batches.',
+    roastLevel: 'Medium-Dark',
+    origin: 'Coorg, India',
+    image: '/Black Honey Sun-Dried.webp',
+    tastingNotes: ['Fig', 'Toffee', 'Dark Plum'],
+    isSubscriptionAvailable: true,
+    flavorProfile: { sweetness: 5, body: 5, acidity: 1, bitterness: 2 },
+    altitude: '1,000 — 1,300m',
+    variety: 'Arabica Selection 9',
+    processing: 'Black Honey',
+  },
+  {
+    id: '6',
+    name: 'Fermented Whiskey',
+    price: 34,
+    description: 'Our most experimental and sought-after offering. Green beans undergo a proprietary anaerobic fermentation process inspired by whiskey barrel aging, developing deep boozy undertones without a drop of alcohol. The flavour profile is unlike anything in Indian specialty coffee — smoky, complex, and utterly addictive. Once it\'s gone, it\'s gone.',
+    roastLevel: 'Dark',
+    origin: 'Estate Reserve, India',
+    image: '/Fermented Whiskey.webp',
+    tastingNotes: ['Oak', 'Vanilla', 'Burnt Caramel'],
+    isSubscriptionAvailable: true,
+    flavorProfile: { sweetness: 3, body: 5, acidity: 1, bitterness: 3 },
+    altitude: '1,100 — 1,400m',
+    variety: 'Arabica Blend',
+    processing: 'Anaerobic Fermented',
   },
 ];
 
@@ -93,10 +140,10 @@ export const QUIZ_STEPS: QuizStep[] = [
 ];
 
 export const QUIZ_BLEND_MAP: Record<string, Record<string, string>> = {
-  chocolate: { beginner: '1', casual: '1', enthusiast: '1', connoisseur: '2' },
-  fruity:    { beginner: '3', casual: '3', enthusiast: '3', connoisseur: '3' },
-  spice:     { beginner: '4', casual: '2', enthusiast: '2', connoisseur: '2' },
-  caramel:   { beginner: '1', casual: '1', enthusiast: '4', connoisseur: '4' },
+  chocolate: { beginner: '1', casual: '3', enthusiast: '2', connoisseur: '6' },
+  fruity:    { beginner: '4', casual: '4', enthusiast: '5', connoisseur: '2' },
+  spice:     { beginner: '1', casual: '3', enthusiast: '6', connoisseur: '6' },
+  caramel:   { beginner: '4', casual: '5', enthusiast: '5', connoisseur: '6' },
 };
 
 export const GEMINI_SYSTEM_PROMPT = `You are Avera's Coffee Concierge — a warm, knowledgeable guide for Avera Specialty Coffee, a premium Indian specialty coffee brand based in Hyderabad, India.
@@ -108,9 +155,9 @@ PERSONALITY & TONE:
 - Use warm language. Say "our" and "we" when talking about Avera. You ARE Avera.
 
 ABOUT AVERA:
-- Avera Specialty Coffee is a luxury coffee brand that precision-roasts 100% Arabica beans fresh on order.
+- Avera Specialty Coffee is a luxury coffee brand that precision-roasts specialty beans fresh on order.
 - Based in Hyderabad, India. Parent company: Aditya Food and Beverages Pvt. Ltd.
-- We source directly from premium Indian estate farms — Coorg, Malabar Coast, Araku Valley, Chikmagalur.
+- We source directly from premium Indian estate farms — Coorg, Araku Valley, Chikmagalur.
 - Every bag is roasted AFTER the customer orders (never pre-roasted stock), ensuring peak freshness.
 - We offer 4 grind options: Whole Bean, Aeropress, French Press, Espresso — ground to micron-level precision.
 - Delivery within 48 hours across Hyderabad and major Indian metros.
@@ -118,25 +165,35 @@ ABOUT AVERA:
 
 COMPLETE PRODUCT CATALOG:
 
-1. SIGNATURE BLEND — ₹2,400
-   Roast: Medium-Dark | Origin: Coorg, India (high-altitude plantations)
-   Tasting Notes: Dark Chocolate, Caramel, Wild Berry
-   Description: Our flagship blend. A meticulously sourced Arabica with a silky body and sweet finish. Perfect for pour-over, French press, or drip. The dark chocolate comes through first, followed by caramel sweetness and a hint of wild berries on the finish. Best for those who want a rich, balanced cup.
+1. ARABICA WASHED — ₹2,400
+   Roast: Medium | Origin: Chikmagalur, India
+   Tasting Notes: Citrus, Brown Sugar, Clean Finish
+   Description: Our purest expression of Arabica. Wet-processed to strip away all fruit, leaving only the bean's true character — crystalline clarity with bright citrus up front, brown sugar sweetness in the body, and a remarkably clean finish. Ideal for pour-over and Aeropress lovers who want precision in every sip.
 
-2. SINGLE ESTATE — ₹2,800
-   Roast: Medium | Origin: Malabar Coast, India
-   Tasting Notes: Spices, Nuts, Earth
-   Description: Exposed to monsoon rains and winds during processing, creating exceptionally low acidity with a heavy, creamy body. The spice notes (cardamom, pepper) are subtle but present, with a nutty backbone and earthy finish. Ideal for those who prefer a smooth, full-bodied cup without bitterness.
+2. ARABICA NATURAL — ₹2,600
+   Roast: Medium-Dark | Origin: Araku Valley, India
+   Tasting Notes: Blueberry, Dark Wine, Chocolate
+   Description: The whole cherry dries slowly under the Indian sun, and the bean absorbs every drop of sweetness. Wild berry and dark wine notes dominate, with a chocolate undertone that lingers. Full-bodied and intoxicating — for those who want their coffee expressive and unapologetic.
 
-3. STARTER BUNDLE — ₹3,200
-   Roast: Light | Origin: Araku Valley, India (Eastern Ghats)
-   Tasting Notes: Jasmine, Citrus, Honey
-   Description: Award-winning organic coffee from the biodiverse Eastern Ghats. Delicate floral aroma with bright citrus undertones and a honey-like sweetness. Perfect for those exploring specialty coffee or who prefer lighter, more complex flavors. Great as a pour-over or Aeropress.
+3. FINE ROBUSTA — ₹2,200
+   Roast: Dark | Origin: Chikmagalur, India
+   Tasting Notes: Dark Cocoa, Walnut, Smoky
+   Description: Specialty-grade Robusta grown at elevation and processed with Arabica-level precision. Twice the caffeine with dark cocoa depth, walnut richness, and a smoky finish. Bold enough to stand alone, strong enough to anchor any milk drink. This is not your ordinary Robusta.
 
-4. DRIP BAGS — ₹2,600
-   Roast: Dark | Origin: Chikmagalur Blend
-   Tasting Notes: Cocoa, Smoke, Molasses
-   Description: Bold, intense, and perfect for cutting through milk. Roasted dark specifically for espresso-style brewing. The cocoa and smoky notes give it depth, with molasses sweetness on the finish. If you like your coffee strong and uncompromising, this is your blend.
+4. RED HONEY SUN-DRIED — ₹2,800
+   Roast: Medium | Origin: Coorg, India
+   Tasting Notes: Peach, Caramel, Raw Honey
+   Description: Partially stripped and sun-dried on raised beds where the remaining mucilage caramelizes. Stone fruit sweetness meets a syrupy, honey-like body. The red honey process walks a razor's edge between clean and wild — and that tension is what makes every cup memorable.
+
+5. BLACK HONEY SUN-DRIED — ₹3,000
+   Roast: Medium-Dark | Origin: Coorg, India
+   Tasting Notes: Fig, Toffee, Dark Plum
+   Description: Our most labour-intensive process. Nearly all the fruit mucilage stays on during an extended, monitored sun-drying phase. Dense, jammy, almost dessert-like — fig and dark plum sweetness with a toffee finish. Extremely limited batches for those who appreciate the extraordinary.
+
+6. FERMENTED WHISKEY — ₹3,400
+   Roast: Dark | Origin: Estate Reserve, India
+   Tasting Notes: Oak, Vanilla, Burnt Caramel
+   Description: Our most experimental and sought-after offering. Green beans undergo proprietary anaerobic fermentation inspired by whiskey barrel aging, developing deep boozy undertones without a drop of alcohol. Oak, vanilla, and burnt caramel create a flavour profile unlike anything in Indian specialty coffee. Once it's gone, it's gone.
 
 BREWING RECOMMENDATIONS (use when asked):
 - Pour Over: Medium grind, 1:16 ratio, 200°F water, 3-4 min

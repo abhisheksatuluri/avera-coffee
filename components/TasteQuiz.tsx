@@ -55,11 +55,17 @@ const TasteQuiz: React.FC = () => {
   if (!started) {
     return (
       <div className="text-center max-w-2xl mx-auto py-12">
-        <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4">Personalized For You</span>
-        <h2 className="text-3xl md:text-5xl font-serif text-cream mb-6 leading-tight">
+        {/* Hero Logo */}
+        <div className="mb-10">
+          <h1 className="text-5xl md:text-8xl font-serif font-bold tracking-widest text-cream drop-shadow-2xl">AVERA</h1>
+          <p className="text-xs md:text-sm uppercase tracking-[0.4em] text-gold mt-2 drop-shadow-lg">Specialty Coffee Roasters</p>
+        </div>
+
+        <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4 drop-shadow-lg">Personalized For You</span>
+        <h2 className="text-3xl md:text-5xl font-serif text-white mb-6 leading-tight drop-shadow-2xl">
           Discover Your <br /><span className="text-gold italic">Perfect Blend</span>
         </h2>
-        <p className="text-cream-dim text-base md:text-lg mb-10 max-w-lg mx-auto">
+        <p className="text-cream text-base md:text-lg mb-10 max-w-lg mx-auto drop-shadow-lg">
           Answer three simple questions about your taste and lifestyle. We'll match you to the Avera blend that's made for you.
         </p>
         <button
@@ -68,7 +74,7 @@ const TasteQuiz: React.FC = () => {
         >
           Take The Quiz
         </button>
-        <p className="text-cream-dim/50 text-xs mt-6 uppercase tracking-wider">60 seconds • 3 questions</p>
+        <p className="text-cream/50 text-xs mt-6 uppercase tracking-wider drop-shadow-lg">60 seconds • 3 questions</p>
       </div>
     );
   }
@@ -79,12 +85,12 @@ const TasteQuiz: React.FC = () => {
     return (
       <div className="max-w-3xl mx-auto py-8">
         <div className="text-center mb-10">
-          <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4">Your Perfect Match</span>
-          <h2 className="text-3xl md:text-5xl font-serif text-cream mb-4">
+          <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4 drop-shadow-lg">Your Perfect Match</span>
+          <h2 className="text-3xl md:text-5xl font-serif text-white mb-4 drop-shadow-2xl">
             The <span className="text-gold italic">{product.name}</span>
           </h2>
         </div>
-        <div className="flex flex-col md:flex-row gap-10 items-center">
+        <div className="flex flex-col md:flex-row gap-10 items-center bg-black/40 backdrop-blur-sm p-6 border border-white/10">
           <div className="w-full md:w-1/2">
             <div className="aspect-[4/5] overflow-hidden bg-espresso">
               <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
@@ -92,8 +98,8 @@ const TasteQuiz: React.FC = () => {
           </div>
           <div className="w-full md:w-1/2 space-y-6">
             <div>
-              <p className="text-amber text-xs uppercase tracking-widest mb-2">{product.origin} • {product.roastLevel} Roast</p>
-              <p className="text-cream-dim leading-relaxed">{product.description}</p>
+              <p className="text-amber text-xs uppercase tracking-widest mb-2 drop-shadow-lg">{product.origin} • {product.roastLevel} Roast</p>
+              <p className="text-cream leading-relaxed">{product.description}</p>
             </div>
             <div>
               <p className="text-xs uppercase tracking-widest text-cream mb-3">Tasting Notes</p>
@@ -103,7 +109,7 @@ const TasteQuiz: React.FC = () => {
                 ))}
               </div>
             </div>
-            <p className="text-2xl text-gold font-medium">₹{product.price * 100}</p>
+            <p className="text-2xl text-gold font-medium">₹{Math.round(product.price * 100 * 0.25)} <span className="text-sm text-cream-dim font-normal">/ 250g</span></p>
             <div className="flex flex-col gap-3 pt-2">
               <a
                 href={getWhatsAppLink(`Hi! I took the Avera Taste Quiz and my recommended blend is ${product.name}. I'd like to order it!`)}
@@ -130,27 +136,27 @@ const TasteQuiz: React.FC = () => {
   if (showLeadForm) {
     return (
       <div className="max-w-md mx-auto py-12 text-center">
-        <div className="w-full h-0.5 bg-white/10 mb-12">
+        <div className="w-full h-0.5 bg-white/20 mb-12">
           <div className="h-full bg-gold" style={{ width: '100%' }} />
         </div>
-        <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4">Almost There</span>
-        <h3 className="text-2xl md:text-3xl font-serif text-cream mb-3">Let's Personalize Your Match</h3>
-        <p className="text-cream-dim text-sm mb-10">Share your details and we'll reveal your perfect blend.</p>
-        <form onSubmit={handleLeadSubmit} className="space-y-4 text-left">
+        <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4 drop-shadow-lg">Almost There</span>
+        <h3 className="text-2xl md:text-3xl font-serif text-white mb-3 drop-shadow-2xl">Let's Personalize Your Match</h3>
+        <p className="text-cream text-sm mb-10 drop-shadow-lg">Share your details and we'll reveal your perfect blend.</p>
+        <form onSubmit={handleLeadSubmit} className="space-y-4 text-left bg-black/40 backdrop-blur-sm p-6 border border-white/10">
           <div>
-            <label className="block text-xs uppercase tracking-widest text-cream-dim mb-2">Name</label>
+            <label className="block text-xs uppercase tracking-widest text-cream mb-2">Name</label>
             <input type="text" value={name} onChange={e => setName(e.target.value)} required
-              className="w-full bg-obsidian border border-white/10 p-4 text-cream placeholder-cream-dim/50 text-sm focus:border-gold focus:outline-none transition-colors" placeholder="Your name" />
+              className="w-full bg-obsidian/80 border border-white/20 p-4 text-white placeholder-cream/40 text-sm focus:border-gold focus:outline-none transition-colors" placeholder="Your name" />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-widest text-cream-dim mb-2">Email</label>
+            <label className="block text-xs uppercase tracking-widest text-cream mb-2">Email</label>
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} required
-              className="w-full bg-obsidian border border-white/10 p-4 text-cream placeholder-cream-dim/50 text-sm focus:border-gold focus:outline-none transition-colors" placeholder="your@email.com" />
+              className="w-full bg-obsidian/80 border border-white/20 p-4 text-white placeholder-cream/40 text-sm focus:border-gold focus:outline-none transition-colors" placeholder="your@email.com" />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-widest text-cream-dim mb-2">Phone</label>
+            <label className="block text-xs uppercase tracking-widest text-cream mb-2">Phone</label>
             <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} required
-              className="w-full bg-obsidian border border-white/10 p-4 text-cream placeholder-cream-dim/50 text-sm focus:border-gold focus:outline-none transition-colors" placeholder="+91 XXXXX XXXXX" />
+              className="w-full bg-obsidian/80 border border-white/20 p-4 text-white placeholder-cream/40 text-sm focus:border-gold focus:outline-none transition-colors" placeholder="+91 XXXXX XXXXX" />
           </div>
           <button type="submit" disabled={submitting}
             className="w-full bg-gold text-obsidian font-bold py-4 text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors mt-6 disabled:opacity-50">
@@ -165,15 +171,15 @@ const TasteQuiz: React.FC = () => {
   const step = QUIZ_STEPS[currentStep];
   return (
     <div className="max-w-2xl mx-auto py-12">
-      <div className="w-full h-0.5 bg-white/10 mb-12">
+      <div className="w-full h-0.5 bg-white/20 mb-12">
         <div className="h-full bg-gold transition-all duration-500 ease-out" style={{ width: `${progress}%` }} />
       </div>
       <div className="text-center">
-        <p className="text-gold text-xs font-bold uppercase tracking-widest mb-4">
+        <p className="text-gold text-xs font-bold uppercase tracking-widest mb-4 drop-shadow-lg">
           Question {currentStep + 1} of {totalSteps}
         </p>
-        <h3 className="text-2xl md:text-4xl font-serif text-cream mb-3">{step.question}</h3>
-        <p className="text-cream-dim text-sm mb-10">{step.subtitle}</p>
+        <h3 className="text-2xl md:text-4xl font-serif text-white mb-3 drop-shadow-2xl">{step.question}</h3>
+        <p className="text-cream text-sm mb-10 drop-shadow-lg">{step.subtitle}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {step.options.map(option => {
             const isSelected = answers[step.id] === option.value;
@@ -181,12 +187,12 @@ const TasteQuiz: React.FC = () => {
               <button
                 key={option.value}
                 onClick={() => handleOptionSelect(step.id, option.value)}
-                className={`p-6 border text-left transition-all duration-200 ${
-                  isSelected ? 'border-gold bg-gold/10' : 'border-white/10 bg-white/[0.02] hover:border-gold/50 hover:bg-gold/5'
+                className={`p-6 border text-left transition-all duration-200 backdrop-blur-sm ${
+                  isSelected ? 'border-gold bg-gold/20' : 'border-white/20 bg-black/40 hover:border-gold/50 hover:bg-black/50'
                 }`}
               >
                 <span className="text-2xl mb-3 block">{option.icon}</span>
-                <span className={`text-sm font-medium block ${isSelected ? 'text-gold' : 'text-cream'} transition-colors`}>
+                <span className={`text-sm font-medium block ${isSelected ? 'text-gold' : 'text-white'} transition-colors drop-shadow-lg`}>
                   {option.label}
                 </span>
               </button>

@@ -59,8 +59,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
         <div className="hidden md:flex justify-center">
           <Link
             to="/"
-            className={`flex items-center gap-3 hover:opacity-80 transition-opacity ${hideLogoOnHome && !isScrolled ? 'opacity-0 pointer-events-none duration-700' : 'opacity-100 duration-300'}`}
-            aria-hidden={hideLogoOnHome && !isScrolled}
+            className={`flex items-center gap-3 hover:opacity-80 transition-opacity duration-300 ${hideLogoOnHome && !isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
           >
             <img src="/Logo.webp" alt="Avera" className="h-10 w-10 rounded-full shadow-md object-cover" />
             <div className="flex flex-col">
@@ -74,7 +73,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
         <div className="md:hidden flex items-center">
           <Link
             to="/"
-            className={`flex items-center gap-2 hover:opacity-80 transition-opacity ${hideLogoOnHome && !isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            className={`flex items-center gap-2 hover:opacity-80 transition-opacity duration-300 ${hideLogoOnHome && !isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
           >
             <img src="/Logo.webp" alt="Avera" className="h-8 w-8 rounded-full shadow-md object-cover" />
             <span className="text-lg font-serif font-bold tracking-widest text-cream leading-none">AVERA</span>

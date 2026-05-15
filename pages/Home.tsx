@@ -7,7 +7,7 @@ import TasteQuiz from '../components/TasteQuiz';
 import { Flame, Truck, ChevronRight, Check } from 'lucide-react';
 
 const Home: React.FC = () => {
-  const featuredProducts = PRODUCTS.slice(0, 3);
+  const featuredProducts = PRODUCTS.slice(0, 6);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Home: React.FC = () => {
           >
             <source src="/Hero Roasting Sequence.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="absolute inset-0 bg-black/70"></div>
         </div>
         <div className="relative z-10 container mx-auto px-4 md:px-6 py-20 md:py-0">
           <TasteQuiz />
@@ -101,7 +101,7 @@ const Home: React.FC = () => {
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img src="/URBAN ACHIEVER LIFESTYLE.webp" alt="" className="w-full h-full object-cover" loading="lazy" />
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-black/60"></div>
         </div>
         <div className="container mx-auto px-6 text-center max-w-4xl relative z-10">
           <h2 className="text-3xl md:text-7xl font-serif text-white drop-shadow-2xl leading-tight">
@@ -115,7 +115,7 @@ const Home: React.FC = () => {
         <div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
           <div className="w-full md:w-1/2 order-2 md:order-1">
             <div className="relative aspect-square">
-              <img src="/AVERA Starter Bundle.webp" alt="Subscription Box" className="w-full h-full object-cover shadow-2xl" loading="lazy" />
+              <img src="/Black Honey Sun-Dried.webp" alt="Subscription Box" className="w-full h-full object-cover shadow-2xl" loading="lazy" />
               <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-obsidian text-gold p-6 md:p-8 shadow-xl">
                 <p className="text-3xl font-serif font-bold">10%</p>
                 <p className="text-xs uppercase tracking-widest">Savings</p>

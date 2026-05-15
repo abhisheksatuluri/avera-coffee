@@ -37,10 +37,10 @@ const Shop: React.FC = () => {
                className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen"
                loading="lazy"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-obsidian/40 via-transparent to-obsidian/80">
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-obsidian/60 via-black/30 to-obsidian/90">
                <div className="text-center">
-                  <h1 className="text-3xl md:text-5xl font-serif text-cream mb-4">Our Collection</h1>
-                  <p className="text-cream-dim tracking-widest uppercase text-xs md:text-sm">Small Batch. Hand Roasted.</p>
+                  <h1 className="text-3xl md:text-5xl font-serif text-white mb-4 drop-shadow-2xl">Our Collection</h1>
+                  <p className="text-cream tracking-widest uppercase text-xs md:text-sm drop-shadow-lg">Small Batch. Hand Roasted.</p>
                </div>
             </div>
          </div>
@@ -64,22 +64,12 @@ const Shop: React.FC = () => {
 
                <h3 className="text-gold uppercase tracking-widest text-sm font-bold mt-12 mb-6 pb-2 border-b border-white/10">Grind Type</h3>
                <div className="flex flex-col space-y-3">
-                  <label className="flex items-center space-x-3 text-cream-dim text-sm cursor-pointer hover:text-cream">
-                     <input type="checkbox" className="accent-gold w-4 h-4 bg-transparent border-white/20" />
-                     <span>Whole Bean</span>
-                  </label>
-                  <label className="flex items-center space-x-3 text-cream-dim text-sm cursor-pointer hover:text-cream">
-                     <input type="checkbox" className="accent-gold w-4 h-4" />
-                     <span>French Press</span>
-                  </label>
-                  <label className="flex items-center space-x-3 text-cream-dim text-sm cursor-pointer hover:text-cream">
-                     <input type="checkbox" className="accent-gold w-4 h-4" />
-                     <span>Paper Filter</span>
-                  </label>
-                  <label className="flex items-center space-x-3 text-cream-dim text-sm cursor-pointer hover:text-cream">
-                     <input type="checkbox" className="accent-gold w-4 h-4" />
-                     <span>Espresso</span>
-                  </label>
+                  {['Whole Bean', 'Aeropress', 'Channi', 'Coffee Filter', 'Cold Brew', 'Commercial Espresso', 'French Press', 'Home Espresso', 'Inverted Aeropress', 'Moka Pot', 'Pourover', 'South Indian Filter', 'Turkish'].map(grind => (
+                     <label key={grind} className="flex items-center space-x-3 text-cream-dim text-sm cursor-pointer hover:text-cream">
+                        <input type="checkbox" className="accent-gold w-4 h-4" />
+                        <span>{grind}</span>
+                     </label>
+                  ))}
                </div>
             </aside>
 
