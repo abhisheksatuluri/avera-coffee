@@ -117,11 +117,12 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
 
       {/* Mobile Menu Overlay. above everything, fully opaque */}
       <div
-        className={`fixed inset-0 z-[60] flex flex-col items-center justify-center space-y-10 transition-transform duration-500 ease-in-out md:hidden bg-[#0B0B0D] ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed inset-0 z-[100] flex flex-col items-center justify-center space-y-10 transition-transform duration-500 ease-in-out md:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        style={{ backgroundColor: '#0B0B0D' }}
       >
         {/* Close button at top-right of overlay. well-separated from content */}
         <button
-          className="absolute top-5 right-5 text-cream hover:text-gold transition-colors flex items-center justify-center w-12 h-12 z-[70]"
+          className="absolute top-5 right-5 text-cream hover:text-gold transition-colors flex items-center justify-center w-12 h-12 z-[110]"
           onClick={() => setIsMobileMenuOpen(false)}
           aria-label="Close menu"
         >

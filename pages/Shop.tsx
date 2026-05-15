@@ -48,7 +48,7 @@ const Shop: React.FC = () => {
          <div className="container mx-auto px-6 pb-24 flex flex-col md:flex-row gap-12 relative z-10">
 
             {/* Sidebar Filters */}
-            <aside className="w-full md:w-1/4 sticky top-32 h-fit">
+            <aside className="w-full md:w-1/4 md:sticky md:top-32 md:h-fit">
                <h3 className="text-gold uppercase tracking-widest text-sm font-bold mb-6 pb-2 border-b border-white/10">Roast Level</h3>
                <div className="flex flex-col space-y-3">
                   {filters.map(filter => (
