@@ -8,7 +8,7 @@ interface NavbarProps {
   hideLogoOnHome?: boolean;
 }
 
-const NAVBAR_HEIGHT = 64; // px — consistent mobile navbar reference
+const NAVBAR_HEIGHT = 64; // px. consistent mobile navbar reference
 
 const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -103,7 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
               </svg>
             </a>
 
-            {/* Mobile Menu Toggle — 44px minimum touch target */}
+            {/* Mobile Menu Toggle. 44px minimum touch target */}
             <button
               className="md:hidden text-cream hover:text-gold transition-colors flex items-center justify-center w-11 h-11"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -115,11 +115,11 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay — above everything, fully opaque */}
+      {/* Mobile Menu Overlay. above everything, fully opaque */}
       <div
         className={`fixed inset-0 z-[60] flex flex-col items-center justify-center space-y-10 transition-transform duration-500 ease-in-out md:hidden bg-[#0B0B0D] ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
-        {/* Close button at top-right of overlay — well-separated from content */}
+        {/* Close button at top-right of overlay. well-separated from content */}
         <button
           className="absolute top-5 right-5 text-cream hover:text-gold transition-colors flex items-center justify-center w-12 h-12 z-[70]"
           onClick={() => setIsMobileMenuOpen(false)}
@@ -128,7 +128,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
           <X strokeWidth={1.5} size={28} />
         </button>
 
-        {/* Nav items — centered with safe padding to avoid close button overlap */}
+        {/* Nav items. centered with safe padding to avoid close button overlap */}
         <div className="flex flex-col items-center space-y-10 pt-16">
           {NAV_ITEMS.map((item) => (
             <Link

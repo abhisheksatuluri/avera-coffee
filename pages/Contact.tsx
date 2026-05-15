@@ -43,7 +43,7 @@ const Contact: React.FC = () => {
             <div className="relative z-10 container mx-auto px-4 md:px-6 py-16 md:py-20 text-center">
                <h1 className="text-3xl md:text-5xl font-serif text-white mb-4 drop-shadow-2xl">Get in Touch</h1>
                <p className="text-cream max-w-lg mx-auto text-sm md:text-base drop-shadow-lg">
-                  Whether you have a question about our roasts, want a personalized recommendation, or just want to talk coffee — we're here.
+                  Whether you have a question about our roasts, want a personalized recommendation, or just want to talk coffee, we're here.
                </p>
             </div>
          </div>

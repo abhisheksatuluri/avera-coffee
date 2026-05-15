@@ -36,9 +36,9 @@ const BREW_METHODS = [
       'Add 18g coarsely ground coffee.',
       'Pour 270ml hot water. Stir once gently.',
       'Place lid on (don\'t press). Steep for exactly 4 minutes.',
-      'Press plunger slowly and evenly. Pour immediately — don\'t let it sit.',
+      'Press plunger slowly and evenly. Pour immediately and don\'t let it sit.',
     ],
-    tip: 'French Press preserves the natural oils that paper filters absorb, giving you a fuller body — ideal for our Natural and Honey processed coffees.',
+    tip: 'French Press preserves the natural oils that paper filters absorb, giving you a fuller body. Ideal for our Natural and Honey processed coffees.',
   },
   {
     id: 'aeropress',
@@ -76,7 +76,7 @@ const BREW_METHODS = [
       'Target 36g output in 25-30 seconds.',
       'The shot should start thin and blonde, thicken to a dark stream, and stop before it goes watery.',
     ],
-    tip: 'Our Fine Robusta was specifically developed for espresso — the high body and crema production cuts beautifully through milk.',
+    tip: 'Our Fine Robusta was specifically developed for espresso. The high body and crema production cuts beautifully through milk.',
   },
   {
     id: 'coldbrew',
@@ -95,7 +95,7 @@ const BREW_METHODS = [
       'Refrigerate for 12-18 hours (don\'t go over 24).',
       'Strain through a fine mesh filter or cheesecloth. Dilute 1:1 with water or milk.',
     ],
-    tip: 'Cold brew extracts sweetness and body without acidity or bitterness. Our Natural process coffees shine here — the blueberry and chocolate notes are amplified.',
+    tip: 'Cold brew extracts sweetness and body without acidity or bitterness. Our Natural process coffees shine here. The blueberry and chocolate notes are amplified.',
   },
   {
     id: 'southindian',
@@ -137,7 +137,7 @@ const BrewGuide: React.FC = () => {
           <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4">The Avera Guide</span>
           <h1 className="text-3xl md:text-5xl font-serif text-white mb-4 drop-shadow-2xl">Brewing Guides</h1>
           <p className="text-cream max-w-lg mx-auto text-sm md:text-base drop-shadow-lg">
-            Master every brew method. From your first pour-over to the perfect espresso — we'll walk you through it.
+            Master every brew method. From your first pour-over to the perfect espresso, we'll walk you through it.
           </p>
         </div>
       </div>

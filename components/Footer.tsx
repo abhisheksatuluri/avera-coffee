@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5">
-          <p className="text-xs text-cream-dim mb-4 md:mb-0">© {new Date().getFullYear()} Avera Specialty Coffee — Aditya Food and Beverages Pvt. Ltd. All rights reserved.</p>
+          <p className="text-xs text-cream-dim mb-4 md:mb-0">© {new Date().getFullYear()} Avera Specialty Coffee. Aditya Food and Beverages Pvt. Ltd. All rights reserved.</p>
           <div className="flex space-x-6">
             <a href="#" className="text-cream-dim hover:text-gold transition-colors"><Instagram size={18} /></a>
             <a href="#" className="text-cream-dim hover:text-gold transition-colors"><Facebook size={18} /></a>

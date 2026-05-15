@@ -115,7 +115,7 @@ const About: React.FC = () => {
 
                {/* Timeline */}
                <div className="relative">
-                  {/* Center line — desktop only */}
+                  {/* Center line - desktop only */}
                   <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gold/30 to-transparent"></div>
 
                   {/* Mobile line */}
@@ -125,13 +125,13 @@ const About: React.FC = () => {
                      {
                         date: 'December 2025',
                         title: 'The Spark',
-                        desc: 'Aditya, frustrated by India\'s instant coffee culture, decides to build a brand that treats coffee like fresh produce — not a pantry staple. Avera Specialty Coffee Roasters is born in Hyderabad.',
+                        desc: 'Aditya, driven by a vision for better coffee in India, set out to build a brand that treats coffee like fresh produce, not a pantry staple. Avera Specialty Coffee Roasters was born in Hyderabad.',
                         icon: '🔥',
                      },
                      {
                         date: 'January 2026',
                         title: 'First Roast',
-                        desc: 'The first batch rolls off our drum roaster — 5 kg of single-origin Arabica from Chikmagalur. Hand-cupped, scored, and perfected. The roast-on-order model is validated.',
+                        desc: 'The first batch rolls off our drum roaster. Single-origin Arabica from Chikmagalur, hand-cupped, scored, and perfected. The roast-on-order model is validated.',
                         icon: '☕',
                      },
                      {
@@ -143,7 +143,7 @@ const About: React.FC = () => {
                      {
                         date: 'May 2026',
                         title: 'The Lineup',
-                        desc: '6 signature coffees launched — from the clean precision of Arabica Washed to the experimental Fermented Whiskey Barrel. Each tells a story of origin and process.',
+                        desc: 'Six signature coffees launched, from the clean precision of Arabica Washed to the experimental Fermented Whiskey Barrel. Each tells a story of origin and process.',
                         icon: '✨',
                      },
                      {
@@ -167,12 +167,12 @@ const About: React.FC = () => {
                            <p className="text-cream-dim text-sm leading-relaxed">{item.desc}</p>
                         </div>
 
-                        {/* Center dot — desktop */}
+                        {/* Center dot - desktop */}
                         <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-espresso border-2 border-gold/50 items-center justify-center text-lg z-10">
                            {item.icon}
                         </div>
 
-                        {/* Left dot — mobile */}
+                        {/* Left dot - mobile */}
                         <div className="md:hidden absolute left-0 w-8 h-8 rounded-full bg-espresso border-2 border-gold/50 flex items-center justify-center text-sm z-10">
                            {item.icon}
                         </div>

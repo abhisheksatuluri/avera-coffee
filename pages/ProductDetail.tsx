@@ -177,7 +177,7 @@ const ProductDetail: React.FC = () => {
                      </div>
                   </div>
 
-                  {/* Grind Selection — Dropdown */}
+                  {/* Grind Selection. Dropdown */}
                   <div className="mb-8" ref={grindRef}>
                      <div className="flex justify-between items-center mb-3">
                         <p className="text-xs uppercase tracking-widest text-cream font-bold">Grind</p>
@@ -218,7 +218,7 @@ const ProductDetail: React.FC = () => {
                   {/* Order Actions */}
                   <div className="flex flex-col gap-4">
                      <a
-                        href={getWhatsAppLink(`Hi! I'd like to order ${product.name} (${size}, ${grind} grind) — ₹${Math.round(product.price * 100 * (SIZES.find(s => s.label === size)?.multiplier || 1))}`)}
+                        href={getWhatsAppLink(`Hi! I'd like to order ${product.name} (${size}, ${grind} grind). ₹${Math.round(product.price * 100 * (SIZES.find(s => s.label === size)?.multiplier || 1))}`)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full bg-gold text-obsidian font-bold py-4 px-6 text-center text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors flex items-center justify-center gap-3"
@@ -277,7 +277,7 @@ const ProductDetail: React.FC = () => {
                </div>
             </div>
 
-            {/* Bottom Details — with texture background */}
+            {/* Bottom Details. with texture background */}
             <div className="relative mt-16 overflow-hidden">
                <img
                   src="/Coffee Beans Texture Background.webp"

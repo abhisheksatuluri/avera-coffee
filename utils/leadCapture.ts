@@ -4,7 +4,7 @@ export async function submitLead(lead: LeadData): Promise<boolean> {
   const key = (process as any).env.WEB3FORMS_KEY;
 
   if (!key || key === 'YOUR_WEB3FORMS_KEY') {
-    console.warn('Web3Forms key not configured — lead logged to console:', lead);
+    console.warn('Web3Forms key not configured. lead logged to console:', lead);
     return true;
   }
 
