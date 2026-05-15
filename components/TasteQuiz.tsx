@@ -125,7 +125,7 @@ const TasteQuiz: React.FC = () => {
                 </svg>
                 Order on WhatsApp
               </a>
-              <a href="#/shop" className="w-full border border-white/20 text-cream font-bold py-4 text-center text-sm uppercase tracking-widest hover:border-gold hover:text-gold transition-colors">
+              <a href="#/shop" className="w-full border border-white/20 text-cream font-bold py-4 text-center text-sm uppercase tracking-widest hover:border-gold hover:text-gold transition-colors block">
                 Explore All Blends
               </a>
             </div>

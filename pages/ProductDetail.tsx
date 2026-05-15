@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { PRODUCTS } from '../constants';
 import Button from '../components/Button';
 import { Star, RefreshCw, Coffee, ChevronDown } from 'lucide-react';
@@ -181,7 +181,7 @@ const ProductDetail: React.FC = () => {
                   <div className="mb-8" ref={grindRef}>
                      <div className="flex justify-between items-center mb-3">
                         <p className="text-xs uppercase tracking-widest text-cream font-bold">Grind</p>
-                        <a href="#/brew-guide" className="text-xs uppercase tracking-widest text-gold hover:text-gold/80 transition-colors">Grind Guide</a>
+                        <Link to="/brew-guide" className="text-xs uppercase tracking-widest text-gold hover:text-gold/80 transition-colors">Grind Guide</Link>
                      </div>
                      <div className="border-t border-gold/30 pt-3 relative">
                         <button

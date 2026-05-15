@@ -110,7 +110,7 @@ const Subscription: React.FC = () => {
                      <p className="text-cream-dim leading-relaxed mb-6">
                         Imagine waking up knowing that the freshest, most precisely roasted coffee in India is already at your door. That's the Avera Club promise.
                      </p>
-                     <a href="/#taste-quiz" className="bg-gold text-obsidian font-bold py-3 px-8 text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors inline-block">Find Your Blend</a>
+                     <Button to="/" variant="primary">Find Your Blend</Button>
                   </div>
                </div>
             </Section>
