@@ -57,8 +57,7 @@ const TasteQuiz: React.FC = () => {
       <div className="text-center max-w-2xl mx-auto py-12">
         {/* Hero Logo */}
         <div className="mb-10">
-          <h1 className="text-5xl md:text-8xl font-serif font-bold tracking-widest text-cream drop-shadow-2xl">AVERA</h1>
-          <p className="text-xs md:text-sm uppercase tracking-[0.4em] text-gold mt-2 drop-shadow-lg">Specialty Coffee Roasters</p>
+          <img src="/Logo.webp" alt="Avera Specialty Coffee Roasters" className="w-32 h-32 md:w-48 md:h-48 mx-auto rounded-full shadow-2xl shadow-gold/20 drop-shadow-2xl" />
         </div>
 
         <span className="text-gold text-xs font-bold uppercase tracking-widest block mb-4 drop-shadow-lg">Personalized For You</span>
