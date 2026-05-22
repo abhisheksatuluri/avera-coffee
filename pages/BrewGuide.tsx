@@ -68,7 +68,7 @@ const BREW_METHODS = [
     grind: 'Fine',
     ratio: '1:2',
     temp: '93°C',
-    bestFor: ['Fine Robusta', 'Fermented Whiskey', 'Black Honey Sun-Dried'],
+    bestFor: ['Robusta', 'Fermented Whiskey', 'Black Honey Sun-Dried'],
     steps: [
       'Grind 18g coffee to a fine, consistent grind (like table salt).',
       'Distribute evenly in the portafilter. Tamp firmly and level.',
@@ -76,7 +76,7 @@ const BREW_METHODS = [
       'Target 36g output in 25-30 seconds.',
       'The shot should start thin and blonde, thicken to a dark stream, and stop before it goes watery.',
     ],
-    tip: 'Our Fine Robusta was specifically developed for espresso. The high body and crema production cuts beautifully through milk.',
+    tip: 'Our Robusta was specifically developed for espresso. The high body and crema production cuts beautifully through milk.',
   },
   {
     id: 'coldbrew',
@@ -87,7 +87,7 @@ const BREW_METHODS = [
     grind: 'Extra Coarse',
     ratio: '1:8',
     temp: 'Cold / Room Temp',
-    bestFor: ['Arabica Natural', 'Fine Robusta', 'Red Honey Sun-Dried'],
+    bestFor: ['Arabica Natural', 'Robusta', 'Red Honey Sun-Dried'],
     steps: [
       'Grind 100g coffee extra coarse (like raw sugar).',
       'Combine with 800ml room temperature or cold filtered water.',
@@ -106,7 +106,7 @@ const BREW_METHODS = [
     grind: 'Fine',
     ratio: '1:10',
     temp: 'Boiling',
-    bestFor: ['Fine Robusta', 'Arabica Washed'],
+    bestFor: ['Robusta', 'Arabica Washed'],
     steps: [
       'Add 20g fine-ground coffee to the upper chamber of the filter.',
       'Press down gently with the pressing disc.',
@@ -114,7 +114,7 @@ const BREW_METHODS = [
       'Cover and wait 10-15 minutes for the decoction to drip through.',
       'Mix 2 tablespoons of decoction with hot milk and sugar to taste.',
     ],
-    tip: 'The traditional South Indian filter creates a concentrated decoction that pairs perfectly with hot milk. Our Fine Robusta gives you that authentic, strong kaapi experience.',
+    tip: 'The traditional South Indian filter creates a concentrated decoction that pairs perfectly with hot milk. Our Robusta gives you that authentic, strong kaapi experience.',
   },
 ];
 
