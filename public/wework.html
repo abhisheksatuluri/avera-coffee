@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avera x WeWork — Partnership Proposal</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+:root{--bg:#0B0B0D;--card:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.08);--gold:#D6A84F;--amber:#C45A1A;--cream:#F4EDE3;--cream-dim:rgba(244,237,227,0.65);--green:#22c55e;--espresso:#1C1410}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--cream);font-family:'Inter',sans-serif;line-height:1.7;overflow-x:hidden}
+.serif{font-family:'Playfair Display',serif}
+section{min-height:100vh;display:flex;align-items:center;padding:80px 24px;position:relative}
+.container{max-width:1100px;margin:0 auto;width:100%}
+.badge{display:inline-block;padding:6px 18px;border:1px solid var(--gold);color:var(--gold);font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:24px}
+.section-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:600}
+h1{font-size:clamp(2.2rem,6vw,4rem);line-height:1.1;margin-bottom:20px}
+h2{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.2;margin-bottom:24px}
+h3{font-size:1.2rem;margin-bottom:12px}
+.subtitle{color:var(--cream-dim);font-size:clamp(1rem,2vw,1.2rem);max-width:600px;line-height:1.8}
+.card{background:var(--card);border:1px solid var(--border);padding:32px;transition:border-color .3s}
+.card:hover{border-color:rgba(214,168,79,0.3)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+.metric{font-size:2.5rem;font-weight:800;color:var(--gold);line-height:1}
+.metric-label{font-size:12px;color:var(--cream-dim);margin-top:6px;text-transform:uppercase;letter-spacing:2px}
+.divider{width:60px;height:2px;background:var(--gold);margin:40px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;padding:14px 16px;border-bottom:2px solid var(--gold);color:var(--gold);font-size:10px;text-transform:uppercase;letter-spacing:2px;font-weight:600}
+td{padding:14px 16px;border-bottom:1px solid var(--border)}
+tr:hover td{background:rgba(214,168,79,0.03)}
+.tag{display:inline-block;padding:3px 12px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;border-radius:2px}
+.tag-gold{background:rgba(214,168,79,0.15);color:var(--gold)}
+.tag-green{background:rgba(34,197,94,0.15);color:#4ade80}
+.tag-amber{background:rgba(196,90,26,0.2);color:#f59e0b}
+.product-card{text-align:center;padding:24px;border:1px solid var(--border);background:var(--card);transition:all .3s}
+.product-card:hover{border-color:var(--gold);transform:translateY(-4px)}
+.product-card img{width:100%;height:200px;object-fit:cover;margin-bottom:16px}
+.product-card h4{font-size:1rem;margin-bottom:4px}
+.product-card .notes{font-size:12px;color:var(--cream-dim)}
+.timeline-h{display:flex;gap:0;position:relative;margin:40px 0}
+.timeline-h::before{content:'';position:absolute;top:24px;left:0;right:0;height:2px;background:var(--border)}
+.timeline-step{flex:1;text-align:center;position:relative;padding:0 12px}
+.timeline-dot{width:12px;height:12px;border-radius:50%;background:var(--gold);margin:18px auto 16px;position:relative;z-index:1}
+.timeline-step h4{font-size:14px;margin-bottom:4px}
+.timeline-step p{font-size:12px;color:var(--cream-dim)}
+.cta-box{background:rgba(214,168,79,0.08);border:2px solid rgba(214,168,79,0.3);padding:40px;text-align:center}
+.cta-box h3{font-size:1.5rem;margin-bottom:12px}
+.btn{display:inline-block;padding:14px 32px;background:var(--gold);color:var(--bg);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:3px;text-decoration:none;transition:all .3s}
+.btn:hover{background:var(--cream)}
+.comparison-row{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
+.comparison-label{width:160px;font-size:13px;color:var(--cream-dim);flex-shrink:0}
+.comparison-bars{flex:1;display:flex;gap:8px}
+.comparison-bar{height:32px;display:flex;align-items:center;padding:0 12px;font-size:11px;font-weight:600;min-width:40px}
+.testimonial{padding:32px;border-left:3px solid var(--gold);background:var(--card);margin-bottom:20px}
+.testimonial p{font-style:italic;margin-bottom:12px;color:var(--cream)}
+.testimonial .author{font-size:13px;color:var(--gold)}
+.slide-num{position:fixed;bottom:24px;right:24px;font-size:11px;color:var(--cream-dim);letter-spacing:2px;z-index:10}
+.fade-section{opacity:0;transform:translateY(20px);transition:all 0.6s ease}
+.fade-section.visible{opacity:1;transform:translateY(0)}
+@media print{body{background:#fff;color:#1a1a1a}section{min-height:auto;page-break-after:always}.card{border:1px solid #ddd}}
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: COVER -->
+<section style="justify-content:center;text-align:center;background:linear-gradient(180deg,rgba(28,20,16,0.8) 0%,var(--bg) 100%)">
+<div class="container">
+  <img src="Logo.webp" alt="Avera" style="width:80px;height:80px;border-radius:50%;margin:0 auto 24px;display:block;object-fit:cover">
+  <div class="badge">Partnership Proposal</div>
+  <h1 class="serif">Avera <span style="color:var(--gold)">x</span> WeWork</h1>
+  <p class="subtitle" style="margin:0 auto 40px">Elevating the daily coffee experience for 110,000+ members across India.</p>
+  <div style="display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-top:32px">
+    <div><div class="metric">6</div><div class="metric-label">Specialty Origins</div></div>
+    <div><div class="metric">48hr</div><div class="metric-label">Roast-to-Delivery</div></div>
+    <div><div class="metric">0</div><div class="metric-label">Risk to WeWork</div></div>
+  </div>
+  <p style="margin-top:48px;font-size:12px;color:var(--cream-dim)">Prepared for Janvi Mittal, Senior Associate F&B, WeWork India<br>May 2026 &bull; Confidential</p>
+</div>
+</section>
+
+<!-- SLIDE 2: THE OPPORTUNITY -->
+<section>
+<div class="container fade-section">
+  <div class="section-label">The Opportunity</div>
+  <h2 class="serif">Coffee Is the Most Consumed Amenity in Every Co-Working Space</h2>
+  <p class="subtitle" style="margin-bottom:48px">Your members make a choice every morning: stay at home or come to WeWork. Great coffee tips that decision.</p>
+  <div class="grid-3">
+    <div class="card" style="text-align:center">
+      <div class="metric">73</div>
+      <div class="metric-label">WeWork Centres</div>
+      <p style="font-size:13px;color:var(--cream-dim);margin-top:12px">Across 8 cities in India</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div class="metric">110K+</div>
+      <div class="metric-label">Active Members</div>
+      <p style="font-size:13px;color:var(--cream-dim);margin-top:12px">Professionals who value quality</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div class="metric">3.1M</div>
+      <div class="metric-label">Cups Served Monthly</div>
+      <p style="font-size:13px;color:var(--cream-dim);margin-top:12px">Estimated across all locations</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:32px;border-color:rgba(214,168,79,0.2)">
+    <p style="font-size:15px;text-align:center;color:var(--cream)"><strong style="color:var(--gold)">The insight:</strong> 78% of co-working members cite coffee quality as a top-3 factor in workspace satisfaction. An upgrade in coffee is not a cost. It is a retention tool.</p>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 3: UNDERSTANDING WEWORK -->
+<section>
+<div class="container fade-section">
+  <div class="section-label">We've Done Our Homework</div>
+  <h2 class="serif">We Understand Your Coffee Journey</h2>
+  <div style="max-width:800px">
+    <div class="timeline-h">
+      <div class="timeline-step">
+        <div class="timeline-dot"></div>
+        <h4>2019-2022</h4>
+        <p>Blue Tokai supplied a custom "WeWork Blend" roasted weekly</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot"></div>
+        <h4>2023</h4>
+        <p>Switched to Nandan Coffee's Yaraman beans across 200+ machines</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot" style="background:var(--green);box-shadow:0 0 12px rgba(34,197,94,0.4)"></div>
+        <h4>2026</h4>
+        <p><strong style="color:var(--gold)">Avera proposes the next evolution</strong></p>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <p style="font-size:15px;color:var(--cream-dim);max-width:700px">You've already proven you evaluate suppliers on merit and are willing to upgrade. We believe the next step is a multi-origin, roast-on-order partner who can deliver freshness your members will notice on the first sip.</p>
+</div>
+</section>
+
+<!-- SLIDE 4: INTRODUCING AVERA -->
+<section>
+<div class="container fade-section">
+  <div class="grid-2" style="align-items:center;gap:48px">
+    <div>
+      <div class="section-label">Who We Are</div>
+      <h2 class="serif">Avera Specialty Coffee Roasters</h2>
+      <p style="color:var(--cream-dim);margin-bottom:24px">Founded in Hyderabad by Aditya Parupalli. Born from a simple belief: coffee should be treated like fresh produce, not a pantry staple.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+        <div class="card" style="padding:20px">
+          <div style="font-size:1.5rem;font-weight:700;color:var(--gold)">6</div>
+          <div style="font-size:12px;color:var(--cream-dim)">Processing Methods</div>
+        </div>
+        <div class="card" style="padding:20px">
+          <div style="font-size:1.5rem;font-weight:700;color:var(--gold)">3</div>
+          <div style="font-size:12px;color:var(--cream-dim)">Source Regions</div>
+        </div>
+        <div class="card" style="padding:20px">
+          <div style="font-size:1.5rem;font-weight:700;color:var(--gold)">48hr</div>
+          <div style="font-size:12px;color:var(--cream-dim)">Roast to Delivery</div>
+        </div>
+        <div class="card" style="padding:20px">
+          <div style="font-size:1.5rem;font-weight:700;color:var(--gold)">13</div>
+          <div style="font-size:12px;color:var(--cream-dim)">Grind Options</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="Arabica Washed.webp" alt="Avera Coffee" style="width:100%;height:400px;object-fit:cover">
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 5: THE LINEUP -->
+<section>
+<div class="container fade-section">
+  <div class="section-label">Our Coffee</div>
+  <h2 class="serif">Six Origins. Six Stories. One Standard: Excellence.</h2>
+  <p class="subtitle" style="margin-bottom:40px">Every bag is roasted after you order. Never pre-roasted. Never stale. Peak flavour, guaranteed.</p>
+
+  <!-- Hero Products -->
+  <div style="margin-bottom:16px"><span class="tag tag-green" style="font-size:11px;padding:5px 14px">100% Arabica Hero Products</span></div>
+  <div class="grid-2" style="margin-bottom:32px">
+    <div class="product-card" style="border-color:rgba(34,197,94,0.3);position:relative">
+      <div style="position:absolute;top:12px;right:12px"><span class="tag tag-green">Hero</span></div>
+      <img src="Arabica Washed.webp" alt="Arabica Washed">
+      <h4 class="serif" style="font-size:1.2rem">Arabica Washed</h4>
+      <div class="notes">Citrus &bull; Brown Sugar &bull; Clean Finish</div>
+      <div style="margin-top:8px"><span class="tag tag-gold">Medium Roast</span></div>
+      <p style="font-size:12px;color:rgba(244,237,227,0.5);margin-top:12px">Crystalline clarity. The purest expression of Arabica. Ideal for automatic machines.</p>
+    </div>
+    <div class="product-card" style="border-color:rgba(34,197,94,0.3);position:relative">
+      <div style="position:absolute;top:12px;right:12px"><span class="tag tag-green">Hero</span></div>
+      <img src="Arabica Natural.webp" alt="Arabica Natural">
+      <h4 class="serif" style="font-size:1.2rem">Arabica Natural</h4>
+      <div class="notes">Blueberry &bull; Dark Wine &bull; Chocolate</div>
+      <div style="margin-top:8px"><span class="tag tag-gold">Medium-Dark</span></div>
+      <p style="font-size:12px;color:rgba(244,237,227,0.5);margin-top:12px">Full-bodied and intoxicating. Sun-dried whole cherry for maximum sweetness.</p>
+    </div>
+  </div>
+
+  <!-- Signature Blend -->
+  <div style="margin-bottom:16px"><span class="tag tag-gold" style="font-size:11px;padding:5px 14px">Signature Blend</span></div>
+  <div class="card" style="margin-bottom:32px;border-color:rgba(214,168,79,0.3)">
+    <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap">
+      <div style="flex:1;min-width:250px">
+        <h3 class="serif" style="font-size:1.3rem;margin-bottom:8px">Avera Signature Blend</h3>
+        <p style="font-size:14px;color:rgba(244,237,227,0.6);margin-bottom:16px">Our flagship blend, crafted for balanced complexity. The Arabica base delivers bright citrus and fruit notes, while the Robusta adds body, crema, and staying power.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div style="padding:8px 16px;border:1px solid rgba(214,168,79,0.2);text-align:center">
+            <div style="font-size:1.2rem;font-weight:700;color:var(--gold)">40%</div>
+            <div style="font-size:10px;color:var(--cream-dim)">Arabica Washed</div>
+          </div>
+          <div style="padding:8px 16px;border:1px solid rgba(214,168,79,0.2);text-align:center">
+            <div style="font-size:1.2rem;font-weight:700;color:var(--gold)">40%</div>
+            <div style="font-size:10px;color:var(--cream-dim)">Arabica Natural</div>
+          </div>
+          <div style="padding:8px 16px;border:1px solid rgba(214,168,79,0.2);text-align:center">
+            <div style="font-size:1.2rem;font-weight:700;color:var(--gold)">20%</div>
+            <div style="font-size:10px;color:var(--cream-dim)">Fine Robusta</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Extended Range -->
+  <div style="margin-bottom:16px"><span class="tag tag-gold" style="font-size:11px;padding:5px 14px">Extended Range</span></div>
+  <div class="grid-4">
+    <div class="product-card">
+      <img src="Fine Robusta.webp" alt="Fine Robusta">
+      <h4 class="serif">Fine Robusta</h4>
+      <div class="notes">Dark Cocoa &bull; Walnut &bull; Smoky</div>
+      <div style="margin-top:8px"><span class="tag tag-gold">Dark Roast</span></div>
+    </div>
+    <div class="product-card">
+      <img src="Red Honey Sun-Dried.webp" alt="Red Honey">
+      <h4 class="serif">Red Honey Sun-Dried</h4>
+      <div class="notes">Peach &bull; Caramel &bull; Raw Honey</div>
+      <div style="margin-top:8px"><span class="tag tag-gold">Medium</span></div>
+    </div>
+    <div class="product-card">
+      <img src="Black Honey Sun-Dried.webp" alt="Black Honey">
+      <h4 class="serif">Black Honey Sun-Dried</h4>
+      <div class="notes">Fig &bull; Toffee &bull; Dark Plum</div>
+      <div style="margin-top:8px"><span class="tag tag-gold">Medium-Dark</span></div>
+    </div>
+    <div class="product-card">
+      <img src="Fermented Whiskey.webp" alt="Fermented Whiskey">
+      <h4 class="serif">Washed Whiskey Barrel</h4>
+      <div class="notes">Oak &bull; Vanilla &bull; Burnt Caramel</div>
+      <div style="margin-top:8px"><span class="tag tag-amber">Limited</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 6: WHY AVERA -->
+<section>
+<div class="container fade-section">
+  <div class="section-label">The Avera Advantage</div>
+  <h2 class="serif">What Changes When You Partner With Us</h2>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr><th style="width:200px">Factor</th><th>Single-Estate Supplier</th><th style="color:var(--gold)">Avera</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Origin Diversity</strong></td>
+        <td>Single estate (Kodaikanal)</td>
+        <td style="color:var(--gold)"><strong>Multi-origin: Chikmagalur, Coorg, Yercaud</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Freshness</strong></td>
+        <td>Roasted centrally, shipped nationally</td>
+        <td style="color:var(--gold)"><strong>Roasted on order. Delivered within 48 hours.</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Variety</strong></td>
+        <td>1-2 blends</td>
+        <td style="color:var(--gold)"><strong>6 distinct coffees. Monthly rotation possible.</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Custom Blends</strong></td>
+        <td>Limited, capped annually</td>
+        <td style="color:var(--gold)"><strong>Unlimited. We create a WeWork Signature Blend.</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Hyderabad Presence</strong></td>
+        <td>No local operations</td>
+        <td style="color:var(--gold)"><strong>Roastery in Hyderabad. Same-city service.</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Account Attention</strong></td>
+        <td>One of many enterprise accounts</td>
+        <td style="color:var(--gold)"><strong>Founder-led. Aditya is your direct contact.</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Member Engagement</strong></td>
+        <td>Static supply</td>
+        <td style="color:var(--gold)"><strong>Seasonal drops, tasting events, origin stories at each coffee point</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 7: WEWORK SIGNATURE BLEND -->
+<section>
+<div class="container fade-section">
+  <div class="grid-2" style="align-items:center;gap:48px">
+    <div>
+      <div class="section-label">Exclusive for WeWork</div>
+      <h2 class="serif">The WeWork <span style="color:var(--gold)">Signature Blend</span></h2>
+      <p style="color:var(--cream-dim);margin-bottom:24px">We will develop a custom blend exclusively for WeWork India. A coffee that your members can only get at WeWork, nowhere else.</p>
+      <ul style="list-style:none;space-y:12px">
+        <li style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;font-size:14px"><span style="color:var(--gold)">&#10003;</span> Co-developed with your F&B team through guided cupping sessions</li>
+        <li style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;font-size:14px"><span style="color:var(--gold)">&#10003;</span> Optimized for your specific machine type and extraction parameters</li>
+        <li style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;font-size:14px"><span style="color:var(--gold)">&#10003;</span> Packaging can feature WeWork co-branding</li>
+        <li style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;font-size:14px"><span style="color:var(--gold)">&#10003;</span> Seasonal variations keep the experience fresh (quarterly rotation)</li>
+        <li style="padding:10px 0;display:flex;align-items:center;gap:12px;font-size:14px"><span style="color:var(--gold)">&#10003;</span> Origin story cards at each coffee point to engage members</li>
+      </ul>
+    </div>
+    <div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="Fine Robusta.webp" alt="WeWork Blend Concept" style="width:100%;height:420px;object-fit:cover">
+      </div>
+      <p style="text-align:center;font-size:12px;color:var(--cream-dim);margin-top:12px">Concept: Co-branded WeWork x Avera packaging</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 8: COST STRUCTURE -->
+<section>
+<div class="container fade-section">
+  <div class="section-label">Cost Structure</div>
+  <h2 class="serif">Exclusive WeWork Pricing</h2>
+  <p class="subtitle" style="margin-bottom:32px">Special partnership rates. Delivery charges and GST excluded.</p>
+  <div style="overflow-x:auto">
+  <table style="margin-bottom:32px">
+    <thead>
+      <tr><th>Product</th><th>Processing</th><th>Roast</th><th>Origin</th><th>MRP/Kg</th><th>WeWork Rate/Kg</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background:rgba(34,197,94,0.04)"><td><strong>Arabica Washed</strong> <span class="tag tag-green">Hero</span></td><td>Washed</td><td>Medium</td><td>Chikmagalur</td><td style="text-decoration:line-through;color:rgba(244,237,227,0.35)">&#8377;1,600</td><td style="color:var(--gold);font-weight:700;font-size:16px">&#8377;1,299</td></tr>
+      <tr style="background:rgba(34,197,94,0.04)"><td><strong>Arabica Natural</strong> <span class="tag tag-green">Hero</span></td><td>Natural (Dry)</td><td>Medium-Dark</td><td>Yercaud</td><td style="text-decoration:line-through;color:rgba(244,237,227,0.35)">&#8377;1,600</td><td style="color:var(--gold);font-weight:700;font-size:16px">&#8377;1,220</td></tr>
+      <tr><td><strong>Fine Robusta</strong></td><td>Washed</td><td>Dark</td><td>Chikmagalur</td><td style="text-decoration:line-through;color:rgba(244,237,227,0.35)">&#8377;1,600</td><td style="color:var(--gold);font-weight:700;font-size:16px">&#8377;1,100</td></tr>
+      <tr><td><strong>Red Honey Sun-Dried</strong></td><td>Red Honey</td><td>Medium</td><td>Coorg</td><td style="text-decoration:line-through;color:rgba(244,237,227,0.35)">&#8377;1,600</td><td style="color:var(--gold);font-weight:700;font-size:16px">&#8377;1,150</td></tr>
+      <tr><td><strong>Black Honey Sun-Dried</strong></td><td>Black Honey</td><td>Medium-Dark</td><td>Coorg</td><td style="text-decoration:line-through;color:rgba(244,237,227,0.35)">&#8377;1,600</td><td style="color:var(--gold);font-weight:700;font-size:16px">&#8377;1,150</td></tr>
+      <tr><td><strong>Washed Whiskey Barrel</strong></td><td>Anaerobic Fermented</td><td>Dark</td><td>Estate Reserve</td><td style="text-decoration:line-through;color:rgba(244,237,227,0.35)">&#8377;1,600</td><td style="color:var(--gold);font-weight:700;font-size:16px">&#8377;1,299</td></tr>
+      <tr style="background:rgba(214,168,79,0.04)"><td><strong>Custom Signature Blend</strong> <span class="tag tag-gold">Exclusive</span></td><td>40/40/20 Blend</td><td>Custom</td><td>Multi-origin</td><td style="text-decoration:line-through;color:rgba(244,237,227,0.35)">&#8377;1,600</td><td style="color:var(--gold);font-weight:700;font-size:16px">&#8377;1,220</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--cream-dim);margin-bottom:32px">* All prices exclusive of GST and delivery charges. Prices valid for WeWork India partnership.</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3>What's Included</h3>
+      <ul style="list-style:none;font-size:14px;color:var(--cream-dim)">
+        <li style="padding:8px 0;border-bottom:1px solid var(--border)"><span style="color:var(--gold)">&#10003;</span> &nbsp;Custom blend development at no extra charge</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border)"><span style="color:var(--gold)">&#10003;</span> &nbsp;Monthly cupping and quality audit reports</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border)"><span style="color:var(--gold)">&#10003;</span> &nbsp;Machine compatibility testing</li>
+        <li style="padding:8px 0"><span style="color:var(--gold)">&#10003;</span> &nbsp;Origin story cards and member engagement materials</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:rgba(34,197,94,0.2)">
+      <h3 style="color:var(--green)">You Save Up To 31%</h3>
+      <p style="font-size:14px;color:var(--cream-dim);margin-top:8px">WeWork partnership rates are 19-31% below our standard B2B pricing. This is our commitment to a long-term relationship, not a short-term discount.</p>
+      <div style="margin-top:16px;padding:12px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.15);text-align:center">
+        <span style="font-size:24px;font-weight:700;color:var(--green)">&#8377;1,100 - &#8377;1,299</span>
+        <span style="font-size:13px;color:var(--cream-dim);display:block;margin-top:4px">per kg, across all variants</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 9: THE PILOT -->
+<section>
+<div class="container fade-section">
+  <div class="section-label">The Proposal</div>
+  <h2 class="serif">The 30-Day Experience Pilot</h2>
+  <p class="subtitle" style="margin-bottom:48px">Zero risk. Zero cost. Just better coffee.</p>
+
+  <div class="grid-4">
+    <div class="card" style="text-align:center;border-top:3px solid var(--gold)">
+      <div style="font-size:2rem;margin-bottom:8px">&#9312;</div>
+      <h4>Select</h4>
+      <p style="font-size:13px;color:var(--cream-dim)">Choose 2 Hyderabad WeWork locations for the pilot</p>
+    </div>
+    <div class="card" style="text-align:center;border-top:3px solid var(--gold)">
+      <div style="font-size:2rem;margin-bottom:8px">&#9313;</div>
+      <h4>Supply</h4>
+      <p style="font-size:13px;color:var(--cream-dim)">Avera supplies all coffee free for 30 days. No cost to WeWork.</p>
+    </div>
+    <div class="card" style="text-align:center;border-top:3px solid var(--gold)">
+      <div style="font-size:2rem;margin-bottom:8px">&#9314;</div>
+      <h4>Measure</h4>
+      <p style="font-size:13px;color:var(--cream-dim)">QR feedback cards at each coffee point. We track member satisfaction.</p>
+    </div>
+    <div class="card" style="text-align:center;border-top:3px solid var(--gold)">
+      <div style="font-size:2rem;margin-bottom:8px">&#9315;</div>
+      <h4>Decide</h4>
+      <p style="font-size:13px;color:var(--cream-dim)">If satisfaction improves, we scale. If not, zero obligation.</p>
+    </div>
+  </div>
+
+  <div class="cta-box" style="margin-top:40px">
+    <h3 class="serif">Why This Works for You</h3>
+    <p style="color:var(--cream-dim);font-size:15px;max-width:600px;margin:0 auto 24px">You get free premium coffee, data-driven member feedback, and a story to tell leadership. We get a chance to prove ourselves. Both sides win.</p>
+    <div class="grid-3" style="max-width:600px;margin:0 auto">
+      <div><div style="font-size:1.5rem;font-weight:700;color:var(--gold)">&#8377;0</div><div style="font-size:11px;color:var(--cream-dim)">Cost to WeWork</div></div>
+      <div><div style="font-size:1.5rem;font-weight:700;color:var(--gold)">30 days</div><div style="font-size:11px;color:var(--cream-dim)">Pilot Duration</div></div>
+      <div><div style="font-size:1.5rem;font-weight:700;color:var(--gold)">2</div><div style="font-size:11px;color:var(--cream-dim)">Locations</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 10: TESTIMONIALS -->
+<section>
+<div class="container fade-section">
+  <div class="section-label">What People Say</div>
+  <h2 class="serif">The Avera Experience</h2>
+  <div class="grid-2">
+    <div class="testimonial">
+      <p>"Avera's roast-on-order model is exactly what specialty coffee should be. The freshness is immediately noticeable, and the variety keeps things interesting."</p>
+      <div class="author">Arjun M. &bull; Creative Director, Hyderabad</div>
+    </div>
+    <div class="testimonial">
+      <p>"We switched our office coffee to Avera and the team hasn't stopped talking about it. The Arabica Natural is a revelation. It is now a part of our culture."</p>
+      <div class="author">Priya S. &bull; Architect, Hyderabad</div>
+    </div>
+    <div class="testimonial">
+      <p>"Finally, a luxury coffee brand that understands roasting is an art form. The attention to process and quality sets Avera apart from everything else we've tried."</p>
+      <div class="author">David K. &bull; Tech Entrepreneur</div>
+    </div>
+    <div class="testimonial">
+      <p>"The Fermented Whiskey Barrel is unlike anything in Indian specialty coffee. Our clients are obsessed. Avera delivers on their promise of peak freshness."</p>
+      <div class="author">Rashi T. &bull; Hospitality Consultant</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 11: DISTRIBUTION & LOGISTICS -->
+<section>
+<div class="container fade-section">
+  <div class="section-label">Operational Capability</div>
+  <h2 class="serif">Built to Deliver. Consistently.</h2>
+  <div class="grid-3">
+    <div class="card" style="text-align:center">
+      <div style="font-size:2rem;margin-bottom:12px">&#9749;</div>
+      <h4>Roastery</h4>
+      <p style="font-size:13px;color:var(--cream-dim)">State-of-the-art drum roaster in Hyderabad. Real-time roast curve tracking. Every batch cupped and scored.</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:2rem;margin-bottom:12px">&#128666;</div>
+      <h4>Logistics</h4>
+      <p style="font-size:13px;color:var(--cream-dim)">Same-day delivery in Hyderabad. 48-hour delivery to all major metros. Partnered with reliable courier networks.</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:2rem;margin-bottom:12px">&#128200;</div>
+      <h4>Quality Control</h4>
+      <p style="font-size:13px;color:var(--cream-dim)">Monthly cupping reports. Roast date printed on every bag. Consistent flavour profiles guaranteed batch to batch.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:32px">
+    <h3>Sourcing Partners</h3>
+    <div class="grid-3" style="margin-top:16px">
+      <div style="padding:16px;border:1px solid var(--border);text-align:center">
+        <div style="font-size:14px;font-weight:600;color:var(--cream)">Chikmagalur</div>
+        <div style="font-size:12px;color:var(--cream-dim)">Arabica &bull; Robusta</div>
+      </div>
+      <div style="padding:16px;border:1px solid var(--border);text-align:center">
+        <div style="font-size:14px;font-weight:600;color:var(--cream)">Coorg</div>
+        <div style="font-size:12px;color:var(--cream-dim)">Honey Processed</div>
+      </div>
+      <div style="padding:16px;border:1px solid var(--border);text-align:center">
+        <div style="font-size:14px;font-weight:600;color:var(--cream)">Yercaud</div>
+        <div style="font-size:12px;color:var(--cream-dim)">Natural Process</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SLIDE 12: NEXT STEPS -->
+<section style="text-align:center">
+<div class="container fade-section">
+  <div class="section-label">Let's Begin</div>
+  <h2 class="serif" style="font-size:clamp(2rem,5vw,3.5rem)">The Next Step Is<br><span style="color:var(--gold)">A Conversation</span></h2>
+  <p class="subtitle" style="margin:0 auto 48px">We would love to schedule a 30-minute call to discuss the pilot, answer your questions, and if you're in Hyderabad, invite you to a private cupping session at our roastery.</p>
+  <div class="grid-3" style="max-width:700px;margin:0 auto 48px">
+    <div class="card" style="text-align:center">
+      <div style="font-size:1.5rem;margin-bottom:8px">&#128222;</div>
+      <h4>Call</h4>
+      <p style="font-size:13px;color:var(--gold)">+91 90874 34124</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:1.5rem;margin-bottom:8px">&#128231;</div>
+      <h4>Email</h4>
+      <p style="font-size:13px;color:var(--gold)">adithya.parupalli@averacoffee.com</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:1.5rem;margin-bottom:8px">&#127760;</div>
+      <h4>Website</h4>
+      <p style="font-size:13px;color:var(--gold)">averacoffee.com</p>
+    </div>
+  </div>
+  <div style="padding:32px;border-top:1px solid var(--border)">
+    <img src="Logo.webp" alt="Avera" style="width:60px;height:60px;border-radius:50%;margin-bottom:16px;object-fit:cover">
+    <h3 class="serif" style="color:var(--gold);font-size:1.8rem;letter-spacing:4px">AVERA</h3>
+    <p style="font-size:11px;color:var(--cream-dim);letter-spacing:3px;text-transform:uppercase;margin-top:4px">Specialty Coffee Roasters</p>
+    <p style="font-size:12px;color:var(--cream-dim);margin-top:16px">Aditya Food & Beverages Pvt. Ltd. &bull; Hyderabad, India</p>
+    <p style="font-size:11px;color:var(--cream-dim);margin-top:8px">Confidential &bull; Prepared May 2026</p>
+  </div>
+</div>
+</section>
+
+<script>
+// Intersection Observer for fade-in sections
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
