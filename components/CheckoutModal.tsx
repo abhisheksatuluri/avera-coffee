@@ -16,6 +16,7 @@ type Status = 'form' | 'processing' | 'success' | 'error';
 const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, size, grind, amountRupees, onClose }) => {
   const [status, setStatus] = useState<Status>('form');
   const [error, setError] = useState('');
+  const [paymentId, setPaymentId] = useState('');
   const [form, setForm] = useState({
     name: '', email: '', phone: '', address: '', city: '', pincode: '',
   });
@@ -71,6 +72,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, size, grind, amo
             });
             const data = await verifyRes.json();
             if (verifyRes.ok && data.verified) {
+              setPaymentId(data.payment_id || response.razorpay_payment_id || '');
               setStatus('success');
             } else {
               setError('Payment could not be verified. If money was deducted, contact us and it will be refunded.');
@@ -117,14 +119,61 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, size, grind, amo
         </div>
 
         {status === 'success' ? (
-          <div className="p-8 text-center">
-            <div className="text-green-400 text-5xl mb-4">&#10003;</div>
-            <h3 className="font-serif text-2xl text-cream mb-2">Order Confirmed</h3>
-            <p className="text-cream-dim text-sm mb-6">
-              Thank you, {form.name}. Your {product.name} ({size}) is being freshly roasted and will ship to {form.city} within 48 hours. A confirmation will reach {form.email}.
-            </p>
-            <button onClick={onClose} className="bg-gold text-obsidian font-bold py-3 px-8 text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors">
-              Done
+          <div className="p-6 md:p-8">
+            {/* Confirmation header */}
+            <div className="text-center mb-6">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center text-green-400 text-2xl">&#10003;</div>
+              <h3 className="font-serif text-2xl text-cream mb-1">Thank you, {form.name.split(' ')[0]}!</h3>
+              <p className="text-cream-dim text-sm">Your order is confirmed and payment received.</p>
+            </div>
+
+            {/* Order number */}
+            {paymentId && (
+              <div className="text-center mb-6 pb-6 border-b border-white/10">
+                <p className="text-[10px] uppercase tracking-widest text-cream-dim mb-1">Order Reference</p>
+                <p className="text-gold font-mono text-sm">{paymentId}</p>
+              </div>
+            )}
+
+            {/* Order details */}
+            <div className="flex items-center gap-4 mb-5">
+              <img src={product.image} alt={product.name} className="w-16 h-16 object-cover" />
+              <div className="flex-1">
+                <p className="text-cream font-medium text-sm">{product.name}</p>
+                <p className="text-cream-dim text-xs">{size} &bull; {grind} &bull; Qty 1</p>
+              </div>
+              <p className="text-gold font-bold">&#8377;{amountRupees}</p>
+            </div>
+
+            {/* Delivery details */}
+            <div className="mb-5 p-4 bg-white/[0.02] border border-white/10">
+              <p className="text-[10px] uppercase tracking-widest text-gold mb-2">Delivering To</p>
+              <p className="text-cream text-sm">{form.name}</p>
+              <p className="text-cream-dim text-xs mt-1">{form.address}, {form.city} &mdash; {form.pincode}</p>
+              <p className="text-cream-dim text-xs mt-1">{form.phone} &bull; {form.email}</p>
+            </div>
+
+            {/* What happens next */}
+            <div className="mb-6">
+              <p className="text-[10px] uppercase tracking-widest text-gold mb-3">What Happens Next</p>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <span className="text-gold text-xs mt-0.5">&#9312;</span>
+                  <p className="text-cream-dim text-xs">Your beans are roasted fresh to order, never from stock.</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-gold text-xs mt-0.5">&#9313;</span>
+                  <p className="text-cream-dim text-xs">We dispatch within 48 hours and send tracking to {form.email}.</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-gold text-xs mt-0.5">&#9314;</span>
+                  <p className="text-cream-dim text-xs">Questions? Message us anytime on WhatsApp.</p>
+                </div>
+              </div>
+            </div>
+
+            <button onClick={onClose} className="w-full bg-gold text-obsidian font-bold py-4 text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors">
+              Continue
             </button>
           </div>
         ) : (
