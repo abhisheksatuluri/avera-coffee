@@ -36,10 +36,11 @@ const Footer: React.FC = () => {
           <div className="col-span-1">
             <h4 className="text-sm uppercase tracking-widest text-gold mb-6">Info</h4>
             <ul className="space-y-4">
-              <li><a href="#" className="text-cream-dim hover:text-cream transition-colors text-sm">Shipping Policy</a></li>
-              <li><a href="#" className="text-cream-dim hover:text-cream transition-colors text-sm">Returns</a></li>
-              <li><a href="#" className="text-cream-dim hover:text-cream transition-colors text-sm">Terms & Conditions</a></li>
-              <li><a href="#" className="text-cream-dim hover:text-cream transition-colors text-sm">Privacy Policy</a></li>
+              <li><a href="/shipping.html" className="text-cream-dim hover:text-cream transition-colors text-sm">Shipping Policy</a></li>
+              <li><a href="/refund.html" className="text-cream-dim hover:text-cream transition-colors text-sm">Refund & Returns</a></li>
+              <li><a href="/cancellation.html" className="text-cream-dim hover:text-cream transition-colors text-sm">Cancellation Policy</a></li>
+              <li><a href="/terms.html" className="text-cream-dim hover:text-cream transition-colors text-sm">Terms & Conditions</a></li>
+              <li><a href="/privacy.html" className="text-cream-dim hover:text-cream transition-colors text-sm">Privacy Policy</a></li>
             </ul>
           </div>
 
