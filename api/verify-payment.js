@@ -49,13 +49,15 @@ export default async function handler(req, res) {
     const sbKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
     if (sbUrl && sbKey) {
       try {
-        const sbRes = await fetch(`${sbUrl}/rest/v1/orders`, {
+        // Upsert on payment_id: if the webhook already inserted a minimal
+        // record (it can win the race), merge the full customer details in.
+        const sbRes = await fetch(`${sbUrl}/rest/v1/orders?on_conflict=payment_id`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             apikey: sbKey,
             Authorization: `Bearer ${sbKey}`,
-            Prefer: 'return=minimal,resolution=ignore-duplicates',
+            Prefer: 'return=minimal,resolution=merge-duplicates',
           },
           body: JSON.stringify({
             user_id: req.body?.user_id || null, // null = guest order
@@ -71,7 +73,8 @@ export default async function handler(req, res) {
             amount: Number(order?.amount) || 0,
             payment_id: razorpay_payment_id,
             razorpay_order_id,
-            status: 'paid',
+            // status intentionally omitted: fresh inserts default to 'paid';
+            // if the webhook already marked it 'captured', the merge keeps it.
           }),
         });
         if (!sbRes.ok) console.error('Supabase order insert failed:', await sbRes.text());

@@ -213,8 +213,11 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, size, grind, amo
               </div>
             </div>
 
-            <button onClick={onClose} className="w-full bg-gold text-obsidian font-bold py-4 text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors">
-              Continue
+            <button
+              onClick={() => { onClose(); if (user) navigate('/account'); }}
+              className="w-full bg-gold text-obsidian font-bold py-4 text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors"
+            >
+              {user ? 'View My Orders' : 'Continue'}
             </button>
           </div>
         ) : !user && !guestMode ? (
