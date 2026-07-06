@@ -11,8 +11,12 @@ create table if not exists public.profiles (
   address text,
   city text,
   pincode text,
+  is_club_member boolean not null default false,
   created_at timestamptz not null default now()
 );
+
+-- Safe to re-run on existing databases:
+alter table public.profiles add column if not exists is_club_member boolean not null default false;
 
 alter table public.profiles enable row level security;
 
