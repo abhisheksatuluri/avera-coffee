@@ -44,7 +44,43 @@ export default async function handler(req, res) {
       return res.status(400).json({ verified: false, error: 'Signature mismatch' });
     }
 
-    // Payment verified. Notify Avera by email (best-effort, never blocks success).
+    // Payment verified. Record the order in Supabase (best-effort, never blocks success).
+    const sbUrl = process.env.VITE_SUPABASE_URL;
+    const sbKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (sbUrl && sbKey) {
+      try {
+        const sbRes = await fetch(`${sbUrl}/rest/v1/orders`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: sbKey,
+            Authorization: `Bearer ${sbKey}`,
+            Prefer: 'return=minimal,resolution=ignore-duplicates',
+          },
+          body: JSON.stringify({
+            user_id: req.body?.user_id || null, // null = guest order
+            customer_name: customer?.name || null,
+            email: customer?.email || null,
+            phone: customer?.phone || null,
+            address: customer?.address || null,
+            city: customer?.city || null,
+            pincode: customer?.pincode || null,
+            product_name: order?.productName || 'Avera Coffee',
+            size: order?.size || null,
+            grind: order?.grind || null,
+            amount: Number(order?.amount) || 0,
+            payment_id: razorpay_payment_id,
+            razorpay_order_id,
+            status: 'paid',
+          }),
+        });
+        if (!sbRes.ok) console.error('Supabase order insert failed:', await sbRes.text());
+      } catch (dbErr) {
+        console.error('Supabase order insert error (non-fatal):', dbErr);
+      }
+    }
+
+    // Notify Avera by email (best-effort, never blocks success).
     const w3 = process.env.WEB3FORMS_KEY;
     if (w3 && customer) {
       try {

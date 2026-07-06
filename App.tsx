@@ -9,7 +9,10 @@ import About from './pages/About';
 import Subscription from './pages/Subscription';
 import Contact from './pages/Contact';
 import BrewGuide from './pages/BrewGuide';
+import Auth from './pages/Auth';
+import Account from './pages/Account';
 import ChatBot from './components/ChatBot';
+import { AuthProvider } from './context/AuthContext';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -28,12 +31,14 @@ const App: React.FC = () => {
   // We need to create a wrapper or move Navbar inside a component that uses useLocation.
 
   return (
-    <HashRouter>
-      <ScrollToTop />
-      <div className="flex flex-col min-h-screen bg-obsidian text-cream font-sans antialiased selection:bg-gold selection:text-obsidian">
-        <AppContent />
-      </div>
-    </HashRouter>
+    <AuthProvider>
+      <HashRouter>
+        <ScrollToTop />
+        <div className="flex flex-col min-h-screen bg-obsidian text-cream font-sans antialiased selection:bg-gold selection:text-obsidian">
+          <AppContent />
+        </div>
+      </HashRouter>
+    </AuthProvider>
   );
 };
 
@@ -53,6 +58,8 @@ const AppContent: React.FC = () => {
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/brew-guide" element={<BrewGuide />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
       </main>
       <Footer />

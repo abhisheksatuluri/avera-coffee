@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { NAV_ITEMS } from '../constants';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { getWhatsAppLink } from '../utils/whatsapp';
+import { useAuth } from '../context/AuthContext';
 
 interface NavbarProps {
   hideLogoOnHome?: boolean;
@@ -14,6 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,6 +93,14 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
             <div className="hidden md:block w-px h-6 bg-white/10 mx-2"></div>
 
             <div className="flex items-center gap-4">
+              <Link
+                to={user ? '/account' : '/auth'}
+                className="text-cream hover:text-gold transition-colors relative flex items-center justify-center w-11 h-11"
+                aria-label={user ? 'My account' : 'Log in'}
+              >
+                <User size={20} strokeWidth={1.5} />
+                {user && <span className="absolute top-2 right-2 w-2 h-2 bg-gold rounded-full" />}
+              </Link>
               <a
                 href={getWhatsAppLink("Hi! I'd like to know more about Avera Coffee.")}
                 target="_blank"
@@ -139,6 +149,12 @@ const Navbar: React.FC<NavbarProps> = ({ hideLogoOnHome = false }) => {
               {item.label}
             </Link>
           ))}
+          <Link
+            to={user ? '/account' : '/auth'}
+            className="text-2xl font-serif text-gold hover:text-cream transition-colors tracking-wide"
+          >
+            {user ? 'My Account' : 'Log In'}
+          </Link>
         </div>
       )}
     </>

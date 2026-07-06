@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { Product } from '../types';
 import { loadRazorpay } from '../utils/razorpay';
+import { useAuth } from '../context/AuthContext';
 
 interface CheckoutModalProps {
   product: Product;
@@ -14,11 +15,14 @@ interface CheckoutModalProps {
 type Status = 'form' | 'processing' | 'success' | 'error';
 
 const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, size, grind, amountRupees, onClose }) => {
+  const { user } = useAuth();
   const [status, setStatus] = useState<Status>('form');
   const [error, setError] = useState('');
   const [paymentId, setPaymentId] = useState('');
   const [form, setForm] = useState({
-    name: '', email: '', phone: '', address: '', city: '', pincode: '',
+    name: (user?.user_metadata?.full_name as string) || '',
+    email: user?.email || '',
+    phone: '', address: '', city: '', pincode: '',
   });
 
   const set = (k: string, v: string) => setForm(prev => ({ ...prev, [k]: v }));
@@ -67,6 +71,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, size, grind, amo
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
                 customer: form,
+                user_id: user?.id || null,
                 order: { productName: product.name, size, grind, amount: amountRupees },
               }),
             });
