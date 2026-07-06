@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { X, Crown, UserCheck, User as UserIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Product } from '../types';
 import { loadRazorpay } from '../utils/razorpay';
 import { useAuth } from '../context/AuthContext';
+import { supabase } from '../utils/supabase';
 
 interface CheckoutModalProps {
   product: Product;
@@ -16,7 +18,10 @@ type Status = 'form' | 'processing' | 'success' | 'error';
 
 const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, size, grind, amountRupees, onClose }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [status, setStatus] = useState<Status>('form');
+  const [guestMode, setGuestMode] = useState(false);
+  const [isClubMember, setIsClubMember] = useState(false);
   const [error, setError] = useState('');
   const [paymentId, setPaymentId] = useState('');
   const [form, setForm] = useState({
@@ -24,6 +29,37 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, size, grind, amo
     email: user?.email || '',
     phone: '', address: '', city: '', pincode: '',
   });
+
+  // Recognise the member: look up their Club status
+  useEffect(() => {
+    if (user && supabase) {
+      supabase
+        .from('profiles')
+        .select('is_club_member, phone, address, city, pincode')
+        .eq('id', user.id)
+        .single()
+        .then(({ data }) => {
+          if (data) {
+            setIsClubMember(Boolean(data.is_club_member));
+            // Prefill saved details for a faster checkout
+            setForm(prev => ({
+              ...prev,
+              phone: prev.phone || data.phone || '',
+              address: prev.address || data.address || '',
+              city: prev.city || data.city || '',
+              pincode: prev.pincode || data.pincode || '',
+            }));
+          }
+        });
+    }
+  }, [user]);
+
+  const goToLogin = () => {
+    // Remember where we were so login brings the customer straight back
+    sessionStorage.setItem('postLoginRedirect', `/product/${product.id}`);
+    sessionStorage.setItem('resumeCheckout', JSON.stringify({ id: product.id, size, grind }));
+    navigate('/auth');
+  };
 
   const set = (k: string, v: string) => setForm(prev => ({ ...prev, [k]: v }));
 
@@ -181,8 +217,54 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, size, grind, amo
               Continue
             </button>
           </div>
+        ) : !user && !guestMode ? (
+          <div className="p-6">
+            {/* Order summary */}
+            <div className="flex items-center gap-4 mb-8 pb-6 border-b border-white/10">
+              <img src={product.image} alt={product.name} className="w-16 h-16 object-cover" />
+              <div className="flex-1">
+                <p className="text-cream font-medium text-sm">{product.name}</p>
+                <p className="text-cream-dim text-xs">{size} &bull; {grind}</p>
+              </div>
+              <p className="text-gold font-bold">&#8377;{amountRupees}</p>
+            </div>
+
+            {/* Login gate */}
+            <div className="text-center mb-6">
+              <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
+                <UserIcon size={20} />
+              </div>
+              <h3 className="font-serif text-xl text-cream mb-1">Are You An Avera Member?</h3>
+              <p className="text-cream-dim text-xs max-w-xs mx-auto">Log in so we can recognise you, prefill your details, and track this order in your account.</p>
+            </div>
+
+            <button
+              onClick={goToLogin}
+              className="w-full bg-gold text-obsidian font-bold py-4 text-sm uppercase tracking-widest hover:bg-gold/90 transition-colors"
+            >
+              Log In / Create Account
+            </button>
+            <button
+              onClick={() => setGuestMode(true)}
+              className="w-full border border-white/15 text-cream-dim py-3.5 mt-3 text-xs uppercase tracking-widest hover:border-gold/40 hover:text-cream transition-colors"
+            >
+              Continue as Guest
+            </button>
+            <p className="text-center text-cream-dim/50 text-[10px] mt-4 uppercase tracking-wider">
+              Club members get early access and member offers
+            </p>
+          </div>
         ) : (
           <div className="p-6">
+            {/* Member recognition strip */}
+            {user && (
+              <div className={`flex items-center gap-2 mb-4 px-3 py-2 text-[11px] uppercase tracking-widest font-bold ${isClubMember ? 'bg-gold/10 border border-gold/30 text-gold' : 'bg-white/[0.03] border border-white/10 text-cream-dim'}`}>
+                {isClubMember ? <Crown size={13} /> : <UserCheck size={13} />}
+                {isClubMember ? 'Avera Club Member' : 'Avera Member'}
+                <span className="ml-auto font-normal normal-case tracking-normal text-cream-dim/70">{user.email}</span>
+              </div>
+            )}
+
             {/* Order summary */}
             <div className="flex items-center gap-4 mb-6 pb-6 border-b border-white/10">
               <img src={product.image} alt={product.name} className="w-16 h-16 object-cover" />

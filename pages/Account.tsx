@@ -33,6 +33,18 @@ const Account: React.FC = () => {
     if (!loading && !user) navigate('/auth');
   }, [user, loading, navigate]);
 
+  // If the customer logged in mid-checkout (e.g. via Google), send them
+  // straight back to where they left off.
+  useEffect(() => {
+    if (user) {
+      const returnTo = sessionStorage.getItem('postLoginRedirect');
+      if (returnTo && returnTo !== '/account') {
+        sessionStorage.removeItem('postLoginRedirect');
+        navigate(returnTo);
+      }
+    }
+  }, [user, navigate]);
+
   useEffect(() => {
     if (!supabase || !user) return;
     supabase

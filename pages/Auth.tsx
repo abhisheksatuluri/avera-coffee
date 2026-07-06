@@ -16,9 +16,20 @@ const Auth: React.FC = () => {
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
 
+  const goAfterAuth = () => {
+    const returnTo = sessionStorage.getItem('postLoginRedirect');
+    if (returnTo) {
+      sessionStorage.removeItem('postLoginRedirect');
+      navigate(returnTo);
+    } else {
+      navigate('/account');
+    }
+  };
+
   useEffect(() => {
-    if (user) navigate('/account');
-  }, [user, navigate]);
+    if (user) goAfterAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const handleGoogle = async () => {
     if (!supabase) return;
@@ -54,7 +65,7 @@ const Auth: React.FC = () => {
         if (alreadyExists) {
           const { error: loginErr } = await supabase.auth.signInWithPassword({ email, password });
           if (!loginErr) {
-            navigate('/account');
+            goAfterAuth();
             return;
           }
           setMode('login');
@@ -66,7 +77,7 @@ const Auth: React.FC = () => {
 
         if (data.session) {
           // Email confirmation disabled: user is logged in immediately.
-          navigate('/account');
+          goAfterAuth();
         } else {
           setNotice('Account created. Please check your email to confirm your address, then log in.');
           setMode('login');
@@ -84,7 +95,7 @@ const Auth: React.FC = () => {
           }
           throw err;
         }
-        navigate('/account');
+        goAfterAuth();
       }
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.');

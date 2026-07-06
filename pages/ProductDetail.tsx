@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import { Star, RefreshCw, Coffee, ChevronDown } from 'lucide-react';
 import { getWhatsAppLink } from '../utils/whatsapp';
 import CheckoutModal from '../components/CheckoutModal';
+import { useAuth } from '../context/AuthContext';
 
 const SIZES = [
    { label: '250g', multiplier: 0.25 },
@@ -35,6 +36,23 @@ const ProductDetail: React.FC = () => {
    const [grind, setGrind] = useState('Whole Bean');
    const [grindOpen, setGrindOpen] = useState(false);
    const [showCheckout, setShowCheckout] = useState(false);
+   const { user } = useAuth();
+
+   // Resume checkout after mid-checkout login
+   useEffect(() => {
+      if (!user || !product) return;
+      const raw = sessionStorage.getItem('resumeCheckout');
+      if (!raw) return;
+      try {
+         const saved = JSON.parse(raw);
+         if (saved.id === product.id) {
+            if (saved.size) setSize(saved.size);
+            if (saved.grind) setGrind(saved.grind);
+            setShowCheckout(true);
+         }
+      } catch { /* ignore corrupt state */ }
+      sessionStorage.removeItem('resumeCheckout');
+   }, [user, product]);
    const grindRef = useRef<HTMLDivElement>(null);
    const videoRef = useRef<HTMLVideoElement>(null);
 
