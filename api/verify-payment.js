@@ -3,6 +3,7 @@
 // Only a matching signature is treated as a real, captured payment.
 
 import crypto from 'crypto';
+import { sendOrderEmails } from './_email.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -83,9 +84,23 @@ export default async function handler(req, res) {
       }
     }
 
-    // Notify Avera by email (best-effort, never blocks success).
+    // Email the customer their confirmation + notify Avera (Zoho SMTP).
+    // Best-effort: never blocks the success response.
+    let zohoSent = false;
+    try {
+      const mail = await sendOrderEmails({
+        order: order || {},
+        customer: customer || {},
+        paymentId: razorpay_payment_id,
+      });
+      zohoSent = Boolean(mail?.sent);
+    } catch (mailErr) {
+      console.error('order emails failed (non-fatal):', mailErr);
+    }
+
+    // Fallback notification to Avera via Web3Forms if Zoho did not send.
     const w3 = process.env.WEB3FORMS_KEY;
-    if (w3 && customer) {
+    if (!zohoSent && w3 && customer) {
       try {
         await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
