@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Package, LogOut, User as UserIcon } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Package, LogOut, User as UserIcon, Crown } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '../utils/supabase';
 import { useAuth } from '../context/AuthContext';
 
@@ -27,6 +27,7 @@ const Account: React.FC = () => {
   const { user, loading, signOut } = useAuth();
   const [orders, setOrders] = useState<OrderRow[]>([]);
   const [ordersLoading, setOrdersLoading] = useState(true);
+  const [isClubMember, setIsClubMember] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) navigate('/auth');
@@ -41,6 +42,14 @@ const Account: React.FC = () => {
       .then(({ data, error }) => {
         if (!error && data) setOrders(data as OrderRow[]);
         setOrdersLoading(false);
+      });
+    supabase
+      .from('profiles')
+      .select('is_club_member')
+      .eq('id', user.id)
+      .single()
+      .then(({ data }) => {
+        if (data) setIsClubMember(Boolean(data.is_club_member));
       });
   }, [user]);
 
@@ -57,13 +66,24 @@ const Account: React.FC = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-12 pb-8 border-b border-white/10">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-gold/15 border border-gold/30 flex items-center justify-center text-gold">
-              <UserIcon size={20} />
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center ${isClubMember ? 'bg-gold/15 border border-gold/40 text-gold' : 'bg-white/5 border border-white/15 text-cream-dim'}`}>
+              {isClubMember ? <Crown size={20} /> : <UserIcon size={20} />}
             </div>
             <div>
-              <span className="text-gold text-[10px] font-bold uppercase tracking-widest block">Avera Club Member</span>
+              {isClubMember ? (
+                <span className="inline-flex items-center gap-1.5 text-gold text-[10px] font-bold uppercase tracking-widest">
+                  <Crown size={11} /> Avera Club Member
+                </span>
+              ) : (
+                <span className="text-cream-dim text-[10px] font-bold uppercase tracking-widest block">Avera Member</span>
+              )}
               <h1 className="text-xl md:text-2xl font-serif text-cream">{displayName}</h1>
               <p className="text-cream-dim text-xs">{user.email}</p>
+              {!isClubMember && (
+                <Link to="/subscription" className="text-gold text-xs hover:underline mt-1 inline-block">
+                  Join The Avera Club for early access and member pricing &rarr;
+                </Link>
+              )}
             </div>
           </div>
           <button

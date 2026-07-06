@@ -4,9 +4,12 @@ import Button from '../components/Button';
 import { Check, Mail, Coffee, Users } from 'lucide-react';
 import { submitLead } from '../utils/leadCapture';
 import { getWhatsAppLink } from '../utils/whatsapp';
+import { supabase } from '../utils/supabase';
+import { useAuth } from '../context/AuthContext';
 
 const Subscription: React.FC = () => {
    const videoRef = useRef<HTMLVideoElement>(null);
+   const { user } = useAuth();
    const [name, setName] = useState('');
    const [email, setEmail] = useState('');
    const [phone, setPhone] = useState('');
@@ -24,6 +27,13 @@ const Subscription: React.FC = () => {
       if (!name || !email || !phone) return;
       setSubmitting(true);
       await submitLead({ name, email, phone, source: 'subscription' });
+      // Logged-in members get official Club status on their profile
+      if (user && supabase) {
+         await supabase
+            .from('profiles')
+            .update({ is_club_member: true, phone })
+            .eq('id', user.id);
+      }
       setSubmitted(true);
       setSubmitting(false);
    };
