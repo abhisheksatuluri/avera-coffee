@@ -39,17 +39,51 @@ const Auth: React.FC = () => {
 
     try {
       if (mode === 'signup') {
-        const { error: err } = await supabase.auth.signUp({
+        const { data, error: err } = await supabase.auth.signUp({
           email,
           password,
           options: { data: { full_name: name } },
         });
+
+        // Account already exists: try logging them in with the password
+        // they just typed instead of showing a dead end.
+        const alreadyExists =
+          (err && /already registered|already exists/i.test(err.message)) ||
+          (!err && data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0);
+
+        if (alreadyExists) {
+          const { error: loginErr } = await supabase.auth.signInWithPassword({ email, password });
+          if (!loginErr) {
+            navigate('/account');
+            return;
+          }
+          setMode('login');
+          setError('You already have an account with this email. Please log in.');
+          return;
+        }
+
         if (err) throw err;
-        setNotice('Account created. Please check your email to confirm your address, then log in.');
-        setMode('login');
+
+        if (data.session) {
+          // Email confirmation disabled: user is logged in immediately.
+          navigate('/account');
+        } else {
+          setNotice('Account created. Please check your email to confirm your address, then log in.');
+          setMode('login');
+        }
       } else {
         const { error: err } = await supabase.auth.signInWithPassword({ email, password });
-        if (err) throw err;
+        if (err) {
+          if (/invalid login credentials/i.test(err.message)) {
+            setError('No account found with this email, or the password is incorrect. New to Avera? Create an account below.');
+            return;
+          }
+          if (/email not confirmed/i.test(err.message)) {
+            setError('Please confirm your email first. Check your inbox for the confirmation link.');
+            return;
+          }
+          throw err;
+        }
         navigate('/account');
       }
     } catch (err: any) {
